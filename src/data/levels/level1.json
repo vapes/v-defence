@@ -17,23 +17,34 @@
   ],
   "waves": [
     {
+      "comment": "Волна 1: Обучение. Хватает на 1-2 башни Lvl 1. Враги очень слабые.",
       "groups": [
-        { "type": "circle", "count": 1, "spawnInterval": 1500, "delayBefore": 0 }
+        { "type": "circle", "count": 5, "spawnInterval": 2000, "delayBefore": 1000 }
       ]
     },
     {
+      "comment": "Волна 2: Проверка скорости. Появляются треугольники. Нужно апгрейдить первую башню до Lvl 2.",
       "groups": [
-        { "type": "circle", "count": 2, "spawnInterval": 1000, "delayBefore": 0 }
+        { "type": "circle", "count": 10, "spawnInterval": 1000, "delayBefore": 0 },
+        { "type": "triangle", "count": 3, "spawnInterval": 1500, "delayBefore": 2000 }
       ]
     },
     {
+      "comment": "Волна 3: Накопление ресурсов. Даем много 'мяса', чтобы игрок заработал на вторую башню и апгрейды.",
       "groups": [
-        { "type": "circle", "count": 3, "spawnInterval": 800, "delayBefore": 0 },
-        { "type": "triangle", "count": 1, "spawnInterval": 1200, "delayBefore": 2000 }
+        { "type": "circle", "count": 20, "spawnInterval": 500, "delayBefore": 0 },
+        { "type": "square", "count": 2, "spawnInterval": 3000, "delayBefore": 5000 }
       ]
     },
     {
+      "comment": "Волна 4: ФИНАЛ. 4 Танка с 600 HP. Суммарное HP = 2400. Без двух башен Lvl 3 (DPS 250) они дойдут до финиша за 10 секунд.",
       "groups": [
+        { "type": "hexagon", "count": 4, "spawnInterval": 4000, "delayBefore": 0 },
+        { "type": "triangle", "count": 5, "spawnInterval": 1000, "delayBefore": 2000 }
+      ]
+    }
+  ]
+}
         { "type": "circle", "count": 4, "spawnInterval": 600, "delayBefore": 0 },
         { "type": "triangle", "count": 2, "spawnInterval": 800, "delayBefore": 1500 }
       ]
