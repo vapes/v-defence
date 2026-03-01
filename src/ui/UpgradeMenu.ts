@@ -1,7 +1,8 @@
 import { Container, Graphics, Text } from 'pixi.js';
 import { COLORS, CELL_SIZE, HUD_HEIGHT } from '../constants';
+import { TowerLevelStats } from '../types';
 import { Tower } from '../game/towers/Tower';
-import TOWER_CONFIGS from '../data/tower-configs.json';
+import { towers as TOWER_CONFIGS } from '../data/tower-configs.json';
 
 const POPUP_W = 224;
 const PAD = 10;
@@ -31,7 +32,7 @@ export class UpgradeMenu extends Container {
     this.popup.removeChildren();
 
     const canUpgrade = tower.canUpgrade;
-    const nextStats = canUpgrade ? TOWER_CONFIGS[tower.towerType].levels[tower.level + 1] : null;
+    const nextStats = canUpgrade ? TOWER_CONFIGS[tower.towerType].levels[tower.level + 1] as TowerLevelStats : null;
     const canAffordUpgrade = canUpgrade && nextStats ? coins >= nextStats.cost : false;
 
     // ── Layout metrics ──────────────────────────────────────────────

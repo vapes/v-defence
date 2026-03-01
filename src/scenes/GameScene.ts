@@ -1,7 +1,7 @@
 import { Container } from 'pixi.js';
 import { Scene, SceneManager } from '../core/SceneManager';
 import { LevelConfig, TowerType, WaveState } from '../types';
-import TOWER_CONFIGS from '../data/tower-configs.json';
+import { towers as TOWER_CONFIGS } from '../data/tower-configs.json';
 import { Grid } from '../game/Grid';
 import { EnemyManager } from '../game/EnemyManager';
 import { TowerManager } from '../game/TowerManager';
@@ -199,9 +199,9 @@ export class GameScene extends Container implements Scene {
 
     tower.onFire = (t, target) => {
       if (t.towerType === 'bullet') {
-        this.projectileManager.add(new Bullet(t.stats.damage, target, t.x, t.y));
+        this.projectileManager.add(new Bullet(t.stats.damage ?? 0, target, t.x, t.y));
       } else {
-        this.projectileManager.add(new LaserBeam(t.stats.damage, target, t.x, t.y));
+        this.projectileManager.add(new LaserBeam(t.stats.damage ?? 0, target, t.x, t.y));
       }
     };
 

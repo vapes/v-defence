@@ -1,7 +1,7 @@
 import { Container, Graphics } from 'pixi.js';
 import { TowerType, TowerLevelStats } from '../../types';
 import { Enemy } from '../enemies/Enemy';
-import TOWER_CONFIGS from '../../data/tower-configs.json';
+import { towers as TOWER_CONFIGS } from '../../data/tower-configs.json';
 
 export abstract class Tower extends Container {
   abstract readonly towerType: TowerType;
@@ -73,7 +73,7 @@ export abstract class Tower extends Container {
     if (target) {
       this.rotateToTarget(target);
       if (this.cooldownTimer <= 0) {
-        this.cooldownTimer = this.stats.fireRate;
+        this.cooldownTimer = this.stats.fireRate ?? 0;
         this.onFire?.(this, target);
       }
     }
@@ -82,7 +82,7 @@ export abstract class Tower extends Container {
   private findTarget(enemies: Enemy[]): Enemy | null {
     let best: Enemy | null = null;
     let bestProgress = -1;
-    const range = this.stats.range;
+    const range = this.stats.range ?? 0;
 
     for (const enemy of enemies) {
       const dx = enemy.x - this.x;
@@ -110,7 +110,8 @@ export abstract class Tower extends Container {
 
   private drawRange(): void {
     this.rangeGfx.clear();
-    this.rangeGfx.circle(0, 0, this.stats.range).fill({ color: 0xffff00, alpha: 0.1 });
-    this.rangeGfx.circle(0, 0, this.stats.range).stroke({ color: 0xffff00, alpha: 0.3, width: 1 });
+    const r = this.stats.range ?? 0;
+    this.rangeGfx.circle(0, 0, r).fill({ color: 0xffff00, alpha: 0.1 });
+    this.rangeGfx.circle(0, 0, r).stroke({ color: 0xffff00, alpha: 0.3, width: 1 });
   }
 }

@@ -19,6 +19,8 @@ export class EnemyFactory {
         return new HexagonEnemy(health, cfg.speed, cfg.reward, cfg.color);
       case 'square':
         return new SquareEnemy(health, cfg.speed, cfg.reward, cfg.color);
+      default:
+        throw new Error(`Enemy type "${type}" is not yet implemented`);
     }
   }
 }
