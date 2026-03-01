@@ -1,13 +1,14 @@
 import { Container, Graphics } from 'pixi.js';
 import { Cell } from './Cell';
 import { CellType, LevelConfig, Point, GridPosition } from '../types';
-import { CELL_SIZE, COLORS, HUD_HEIGHT } from '../constants';
+import { CELL_SIZE, COLORS, HUD_HEIGHT, TOWER_BAR_HEIGHT } from '../constants';
 import { PathFinder } from './PathFinder';
 
 export class Grid extends Container {
   cells: Cell[][] = [];
   path: Point[] = [];
   private gridGfx: Graphics;
+  private highlightGfx: Graphics;
   rows: number = 0;
   cols: number = 0;
   offsetX: number = 0;
@@ -19,6 +20,8 @@ export class Grid extends Container {
     super();
     this.gridGfx = new Graphics();
     this.addChild(this.gridGfx);
+    this.highlightGfx = new Graphics();
+    this.addChild(this.highlightGfx);
   }
 
   init(level: LevelConfig, screenWidth: number, screenHeight: number): void {
@@ -28,7 +31,7 @@ export class Grid extends Container {
     const gridWidth = this.cols * CELL_SIZE;
     const gridHeight = this.rows * CELL_SIZE;
     this.offsetX = Math.floor((screenWidth - gridWidth) / 2);
-    this.offsetY = HUD_HEIGHT + Math.floor((screenHeight - HUD_HEIGHT - gridHeight) / 2);
+    this.offsetY = HUD_HEIGHT + Math.floor((screenHeight - HUD_HEIGHT - TOWER_BAR_HEIGHT - gridHeight) / 2);
 
     this.cells = [];
     for (let r = 0; r < this.rows; r++) {
@@ -90,5 +93,26 @@ export class Grid extends Container {
       x: this.offsetX + col * CELL_SIZE + CELL_SIZE / 2,
       y: this.offsetY + row * CELL_SIZE + CELL_SIZE / 2,
     };
+  }
+
+  getCellAtWorldPos(worldX: number, worldY: number): GridPosition | null {
+    const col = Math.floor((worldX - this.offsetX) / CELL_SIZE);
+    const row = Math.floor((worldY - this.offsetY) / CELL_SIZE);
+    if (row >= 0 && row < this.rows && col >= 0 && col < this.cols) {
+      return { row, col };
+    }
+    return null;
+  }
+
+  highlightCell(row: number, col: number, valid: boolean): void {
+    this.highlightGfx.clear();
+    const x = this.offsetX + col * CELL_SIZE;
+    const y = this.offsetY + row * CELL_SIZE;
+    const color = valid ? 0x00ff88 : 0xff4444;
+    this.highlightGfx.rect(x, y, CELL_SIZE, CELL_SIZE).fill({ color, alpha: 0.35 });
+  }
+
+  clearHighlight(): void {
+    this.highlightGfx.clear();
   }
 }

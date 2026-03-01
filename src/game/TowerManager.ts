@@ -37,6 +37,12 @@ export class TowerManager {
     }
   }
 
+  showAllRanges(show: boolean): void {
+    for (const tower of this.towers) {
+      tower.setShowRange(show);
+    }
+  }
+
   clear(): void {
     for (const t of this.towers) {
       this.container.removeChild(t);

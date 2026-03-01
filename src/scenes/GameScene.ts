@@ -12,7 +12,7 @@ import { Tower } from '../game/towers/Tower';
 import { Bullet } from '../game/projectiles/Bullet';
 import { LaserBeam } from '../game/projectiles/LaserBeam';
 import { HUD } from '../ui/HUD';
-import { BuildMenu } from '../ui/BuildMenu';
+import { TowerBar } from '../ui/TowerBar';
 import { UpgradeMenu } from '../ui/UpgradeMenu';
 import { CoinAnimation } from '../ui/CoinAnimation';
 import { WaveCountdown } from '../ui/WaveCountdown';
@@ -32,7 +32,7 @@ export class GameScene extends Container implements Scene {
   private waveManager!: WaveManager;
 
   private hud!: HUD;
-  private buildMenu!: BuildMenu;
+  private towerBar!: TowerBar;
   private upgradeMenu!: UpgradeMenu;
   private coinAnim!: CoinAnimation;
   private waveCountdown!: WaveCountdown;
@@ -43,6 +43,13 @@ export class GameScene extends Container implements Scene {
   private gameOver: boolean = false;
 
   private selectedCell: Cell | null = null;
+
+  // Drag-and-drop state
+  private isDragging: boolean = false;
+  private dragType: TowerType | null = null;
+  private dragGhost: Tower | null = null;
+  private dragOverlay!: Container;
+  private dragHoverCell: { row: number; col: number } | null = null;
 
   constructor(sceneManager: SceneManager, level: LevelConfig) {
     super();
@@ -68,6 +75,10 @@ export class GameScene extends Container implements Scene {
     this.towerManager = new TowerManager(this);
     this.projectileManager = new ProjectileManager(this);
 
+    // Drag overlay (above game entities, below UI)
+    this.dragOverlay = new Container();
+    this.addChild(this.dragOverlay);
+
     // Wave manager
     this.waveManager = new WaveManager(this.enemyManager);
 
@@ -86,12 +97,14 @@ export class GameScene extends Container implements Scene {
     this.waveCountdown = new WaveCountdown(w, h);
     this.addChild(this.waveCountdown);
 
-    // UI Panels (on top)
-    this.buildMenu = new BuildMenu(w, h);
-    this.addChild(this.buildMenu);
-
+    // Upgrade menu (still used for placed towers)
     this.upgradeMenu = new UpgradeMenu(w, h);
     this.addChild(this.upgradeMenu);
+
+    // Tower bar (bottom, always on top)
+    this.towerBar = new TowerBar(w, h);
+    this.towerBar.setTowers(this.level.availableTowers, this.coins);
+    this.addChild(this.towerBar);
 
     // Wire events
     this.grid.onCellClick = (cell) => this.onCellClick(cell);
@@ -99,6 +112,7 @@ export class GameScene extends Container implements Scene {
     this.enemyManager.onEnemyKilled = (enemy) => {
       this.coins += enemy.reward;
       this.hud.coins = this.coins;
+      this.towerBar.setTowers(this.level.availableTowers, this.coins);
       const hudPos = this.hud.coinTextPosition;
       this.coinAnim.spawn(enemy.x, enemy.y, hudPos.x, hudPos.y);
     };
@@ -136,17 +150,18 @@ export class GameScene extends Container implements Scene {
       }
     };
 
-    this.buildMenu.onSelect = (type) => this.buildTower(type);
-    this.buildMenu.onClose = () => { this.selectedCell = null; this.towerManager.deselectAll(); };
+    this.towerBar.onTowerDragStart = (type, x, y) => this.startTowerDrag(type, x, y);
 
     this.upgradeMenu.onUpgrade = (tower) => this.upgradeTower(tower);
     this.upgradeMenu.onSell = (tower) => this.sellTower(tower);
-    this.upgradeMenu.onClose = () => { this.selectedCell = null; this.towerManager.deselectAll(); };
+    this.upgradeMenu.onClose = () => {
+      this.selectedCell = null;
+      this.towerManager.deselectAll();
+    };
 
     // Tutorial for level 1
     if (this.level.id === 1) {
       this.tutorial = new Tutorial(w, h);
-      // Highlight a good grass cell next to the path (row 1, col 3)
       const hlPos = this.grid.getCellWorldPos(1, 3);
       this.tutorial.highlightWorldX = hlPos.x;
       this.tutorial.highlightWorldY = hlPos.y;
@@ -155,32 +170,119 @@ export class GameScene extends Container implements Scene {
       };
       this.addChild(this.tutorial);
     } else {
-      // Start waves immediately for other levels
       this.waveManager.init(this.level.waves);
     }
   }
 
   private onCellClick(cell: Cell): void {
+    if (this.isDragging) return;
+
     this.towerManager.deselectAll();
-    this.buildMenu.close();
     this.upgradeMenu.close();
 
     if (cell.tower) {
       cell.tower.setShowRange(true);
       this.selectedCell = cell;
       this.upgradeMenu.open(cell.tower, this.coins);
-    } else if (cell.canBuild) {
-      this.selectedCell = cell;
-      // Advance tutorial from TapCell → BuildTower when player taps a grass cell
-      if (this.tutorial && this.tutorial.step === TutorialStep.TapCell) {
-        this.tutorial.showStep(TutorialStep.BuildTower);
-      }
-      const pos = this.grid.getCellWorldPos(cell.row, cell.col);
-      this.buildMenu.open(this.level.availableTowers, this.coins, pos.x, pos.y);
     } else {
       this.selectedCell = null;
     }
   }
+
+  // ── Drag-and-drop ────────────────────────────────────────────────────────────
+
+  private startTowerDrag(type: TowerType, x: number, y: number): void {
+    if (this.isDragging || this.gameOver) return;
+
+    const cost = TOWER_CONFIGS[type].levels[0].cost;
+    if (this.coins < cost) return;
+
+    let ghost: Tower;
+    try {
+      ghost = TowerFactory.create(type, 0, 0);
+    } catch {
+      return; // tower type not yet implemented
+    }
+
+    ghost.alpha = 0.65;
+    ghost.setShowRange(true);
+    ghost.x = x;
+    ghost.y = y;
+
+    this.isDragging = true;
+    this.dragType = type;
+    this.dragGhost = ghost;
+    this.dragOverlay.addChild(ghost);
+
+    // Close any open menus
+    this.upgradeMenu.close();
+    this.towerManager.deselectAll();
+
+    // Reveal all placed tower ranges so the player can plan placement
+    this.towerManager.showAllRanges(true);
+
+    window.addEventListener('pointermove', this.handleDragMove);
+    window.addEventListener('pointerup', this.handleDragEnd);
+  }
+
+  private readonly handleDragMove = (e: PointerEvent): void => {
+    if (!this.isDragging || !this.dragGhost) return;
+
+    const wx = e.clientX;
+    const wy = e.clientY;
+
+    const cellPos = this.grid.getCellAtWorldPos(wx, wy);
+    if (cellPos) {
+      const cell = this.grid.cells[cellPos.row][cellPos.col];
+      const worldPos = this.grid.getCellWorldPos(cellPos.row, cellPos.col);
+      // Snap ghost to cell center
+      this.dragGhost.x = worldPos.x;
+      this.dragGhost.y = worldPos.y;
+      if (cell.canBuild) {
+        this.grid.highlightCell(cellPos.row, cellPos.col, true);
+        this.dragHoverCell = cellPos;
+      } else {
+        this.grid.highlightCell(cellPos.row, cellPos.col, false);
+        this.dragHoverCell = null;
+      }
+    } else {
+      // Float freely when outside the grid
+      this.dragGhost.x = wx;
+      this.dragGhost.y = wy;
+      this.grid.clearHighlight();
+      this.dragHoverCell = null;
+    }
+  };
+
+  private readonly handleDragEnd = (_e: PointerEvent): void => {
+    window.removeEventListener('pointermove', this.handleDragMove);
+    window.removeEventListener('pointerup', this.handleDragEnd);
+
+    if (this.dragHoverCell && this.dragType) {
+      const cell = this.grid.cells[this.dragHoverCell.row]?.[this.dragHoverCell.col];
+      if (cell?.canBuild) {
+        this.selectedCell = cell;
+        this.buildTower(this.dragType);
+      }
+    }
+
+    this.cleanupDrag();
+  };
+
+  private cleanupDrag(): void {
+    if (this.dragGhost) {
+      this.dragOverlay.removeChild(this.dragGhost);
+      this.dragGhost.destroy();
+      this.dragGhost = null;
+    }
+    this.grid.clearHighlight();
+    this.towerManager.showAllRanges(false);
+    this.isDragging = false;
+    this.dragType = null;
+    this.dragHoverCell = null;
+  }
+
+  // ── Tower lifecycle ───────────────────────────────────────────────────────────
 
   private buildTower(type: TowerType): void {
     if (!this.selectedCell || !this.selectedCell.canBuild) return;
@@ -190,6 +292,7 @@ export class GameScene extends Container implements Scene {
 
     this.coins -= cost;
     this.hud.coins = this.coins;
+    this.towerBar.setTowers(this.level.availableTowers, this.coins);
 
     const tower = TowerFactory.create(type, this.selectedCell.row, this.selectedCell.col);
     const pos = this.grid.getCellWorldPos(this.selectedCell.row, this.selectedCell.col);
@@ -209,8 +312,10 @@ export class GameScene extends Container implements Scene {
     this.towerManager.add(tower);
     this.selectedCell = null;
 
-    // Advance tutorial from BuildTower → TowerBuilt
-    if (this.tutorial && this.tutorial.step === TutorialStep.BuildTower) {
+    // Advance tutorial: drag-and-drop counts as the full build action
+    if (this.tutorial &&
+        (this.tutorial.step === TutorialStep.TapCell ||
+         this.tutorial.step === TutorialStep.BuildTower)) {
       this.tutorial.showStep(TutorialStep.TowerBuilt);
     }
   }
@@ -222,6 +327,7 @@ export class GameScene extends Container implements Scene {
 
     this.coins -= cost;
     this.hud.coins = this.coins;
+    this.towerBar.setTowers(this.level.availableTowers, this.coins);
     tower.upgrade();
   }
 
@@ -229,6 +335,7 @@ export class GameScene extends Container implements Scene {
     const refund = tower.sellValue;
     this.coins += refund;
     this.hud.coins = this.coins;
+    this.towerBar.setTowers(this.level.availableTowers, this.coins);
 
     const cell = this.grid.cells[tower.gridRow]?.[tower.gridCol];
     if (cell) cell.tower = null;
@@ -244,11 +351,9 @@ export class GameScene extends Container implements Scene {
     this.towerManager.update(dt, this.enemyManager.enemies);
     this.projectileManager.update(dt);
     this.coinAnim.update(dt);
-    this.buildMenu.update(dt);
     this.upgradeMenu.update(dt);
     this.tutorial?.update(dt);
 
-    // Check victory after all enemies cleared on last wave
     if (this.waveManager.state === WaveState.Complete && this.enemyManager.activeCount === 0 && !this.gameOver) {
       this.gameOver = true;
       this.sceneManager.goTo(new VictoryScene(this.sceneManager, this.level.id));
@@ -256,6 +361,11 @@ export class GameScene extends Container implements Scene {
   }
 
   onExit(): void {
+    // Clean up any in-flight drag
+    window.removeEventListener('pointermove', this.handleDragMove);
+    window.removeEventListener('pointerup', this.handleDragEnd);
+    this.cleanupDrag();
+
     this.enemyManager.clear();
     this.towerManager.clear();
     this.projectileManager.clear();
