@@ -45,9 +45,3 @@
     }
   ]
 }
-        { "type": "circle", "count": 4, "spawnInterval": 600, "delayBefore": 0 },
-        { "type": "triangle", "count": 2, "spawnInterval": 800, "delayBefore": 1500 }
-      ]
-    }
-  ]
-}

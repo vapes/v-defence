@@ -5,8 +5,19 @@ export enum CellType {
   Base = 3,
 }
 
-export type TowerType = 'bullet' | 'laser';
-export type EnemyType = 'circle' | 'triangle' | 'hexagon' | 'square';
+export type TowerType =
+  | 'bullet'
+  | 'laser'
+  | 'mortar'
+  | 'cryo'
+  | 'alchemist'
+  | 'gold_mine'
+  | 'tesla'
+  | 'void_beacon'
+  | 'oracle'
+  | 'orbital';
+
+export type EnemyType = 'circle' | 'triangle' | 'hexagon' | 'square' | 'pentagon';
 
 export interface Point {
   x: number;
@@ -40,14 +51,48 @@ export interface LevelConfig {
 }
 
 export interface TowerLevelStats {
-  damage: number;
-  fireRate: number;
-  range: number;
+  level: number;
   cost: number;
+  range?: number;
+  // Standard attack
+  damage?: number;
+  fireRate?: number;
+  // Laser
+  baseDamage?: number;
+  maxDamage?: number;
+  rampUpTime?: number;
+  // Mortar (AoE)
+  aoeRadius?: number;
+  stunDuration?: number;
+  // Cryo (slow)
+  slowFactor?: number;
+  // Alchemist (DoT)
+  dotDamage?: number;
+  dotDuration?: number;
+  armorShred?: number;
+  // Gold Mine (economy)
+  income?: number;
+  interval?: number;
+  killBonus?: number;
+  // Tesla (chain lightning)
+  chainTargets?: number;
+  strikeChance?: number;
+  strikeDamage?: number;
+  // Void Beacon (teleport)
+  teleportChance?: number;
+  cooldown?: number;
+  bossStun?: number;
+  // Oracle (aura buff)
+  rangeBonus?: number;
+  speedBonus?: number;
+  auraRadius?: number;
+  revealStealth?: boolean;
+  // Orbital (global sniper)
+  ignoreArmor?: boolean;
 }
 
 export interface TowerConfig {
-  type: TowerType;
+  type: string;
   levels: TowerLevelStats[];
 }
 
@@ -57,6 +102,7 @@ export interface EnemyConfig {
   speed: number;
   reward: number;
   color: number;
+  armor?: number;
 }
 
 export enum WaveState {

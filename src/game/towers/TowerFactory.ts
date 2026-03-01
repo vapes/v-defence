@@ -10,6 +10,8 @@ export class TowerFactory {
         return new BulletTower(row, col);
       case 'laser':
         return new LaserTower(row, col);
+      default:
+        throw new Error(`Tower type "${type}" is not yet implemented`);
     }
   }
 }
