@@ -61,6 +61,7 @@ export interface EnemyConfig {
 
 export enum WaveState {
   Idle = 'idle',
+  Building = 'building',
   Spawning = 'spawning',
   Waiting = 'waiting',
   Countdown = 'countdown',

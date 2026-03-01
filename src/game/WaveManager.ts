@@ -25,6 +25,7 @@ export class WaveManager {
   private spawnTasks: SpawnTask[] = [];
   private waveMultiplier: number = 1;
 
+  onBuildPhaseStart?: (wave: number) => void;
   onWaveStart?: (wave: number) => void;
   onAllWavesComplete?: () => void;
   onCountdownTick?: (seconds: number) => void;
@@ -37,7 +38,12 @@ export class WaveManager {
     this.waves = waves;
     this.totalWaves = waves.length;
     this.currentWave = 0;
-    this.state = WaveState.Idle;
+    this.state = WaveState.Building;
+    this.onBuildPhaseStart?.(this.currentWave + 1);
+  }
+
+  startWave(): void {
+    if (this.state !== WaveState.Building) return;
     this.startNextWave();
   }
 
@@ -86,7 +92,8 @@ export class WaveManager {
         this.countdownTime -= ms;
         this.onCountdownTick?.(Math.ceil(this.countdownTime / 1000));
         if (this.countdownTime <= 0) {
-          this.startNextWave();
+          this.state = WaveState.Building;
+          this.onBuildPhaseStart?.(this.currentWave + 1);
         }
         break;
     }

@@ -112,6 +112,10 @@ export class GameScene extends Container implements Scene {
       }
     };
 
+    this.waveManager.onBuildPhaseStart = (wave) => {
+      this.waveCountdown.showBuildPhase(wave, this.level.waves.length);
+    };
+
     this.waveManager.onWaveStart = (wave) => {
       this.hud.setWave(wave, this.level.waves.length);
       this.waveCountdown.hide();
@@ -119,6 +123,10 @@ export class GameScene extends Container implements Scene {
 
     this.waveManager.onCountdownTick = (seconds) => {
       this.waveCountdown.show(seconds);
+    };
+
+    this.waveCountdown.onStartWave = () => {
+      this.waveManager.startWave();
     };
 
     this.waveManager.onAllWavesComplete = () => {
