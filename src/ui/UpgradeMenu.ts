@@ -1,120 +1,170 @@
 import { Container, Graphics, Text } from 'pixi.js';
-import { COLORS } from '../constants';
+import { COLORS, CELL_SIZE, HUD_HEIGHT } from '../constants';
 import { Tower } from '../game/towers/Tower';
 import { TOWER_CONFIGS } from '../data/tower-stats';
-import { Button } from './Button';
+
+const POPUP_W = 224;
+const PAD = 10;
+const BTN_H = 32;
 
 export class UpgradeMenu extends Container {
-  private panel: Container;
-  private overlay: Graphics;
-  private targetX: number = 0;
-  private isOpen: boolean = false;
-  private panelWidth = 220;
-  private contentContainer: Container;
+  private popup: Container;
+  private sw: number;
+  private sh: number;
 
   onUpgrade?: (tower: Tower) => void;
   onSell?: (tower: Tower) => void;
   onClose?: () => void;
 
-  private currentTower: Tower | null = null;
-
   constructor(screenWidth: number, screenHeight: number) {
     super();
+    this.sw = screenWidth;
+    this.sh = screenHeight;
 
-    this.overlay = new Graphics();
-    this.overlay.rect(0, 0, screenWidth, screenHeight).fill({ color: COLORS.panelOverlay, alpha: 0.4 });
-    this.overlay.interactive = true;
-    this.overlay.on('pointertap', () => this.close());
-    this.addChild(this.overlay);
-
-    this.panel = new Container();
-    this.panel.x = -this.panelWidth;
-    this.addChild(this.panel);
-
-    const bg = new Graphics();
-    bg.rect(0, 0, this.panelWidth, screenHeight).fill(COLORS.panelBackground);
-    this.panel.addChild(bg);
-
-    this.contentContainer = new Container();
-    this.panel.addChild(this.contentContainer);
+    this.popup = new Container();
+    this.addChild(this.popup);
 
     this.visible = false;
   }
 
   open(tower: Tower, coins: number): void {
-    this.currentTower = tower;
-    this.contentContainer.removeChildren();
+    this.popup.removeChildren();
 
-    const style = { fontSize: 14, fill: 0xffffff, fontFamily: 'Arial' };
+    const canUpgrade = tower.canUpgrade;
+    const nextStats = canUpgrade ? TOWER_CONFIGS[tower.towerType].levels[tower.level + 1] : null;
+    const canAffordUpgrade = canUpgrade && nextStats ? coins >= nextStats.cost : false;
 
+    // ── Layout metrics ──────────────────────────────────────────────
+    const titleY = PAD;
+    const statsY = titleY + 22 + 4;
+    const hintY = statsY + 16 + 3;
+    const showHint = canUpgrade && nextStats !== null;
+    const btnY = (showHint ? hintY + 14 : statsY + 16) + 10;
+    const totalH = btnY + BTN_H + PAD;
+
+    // Background
+    const bg = new Graphics();
+    bg.roundRect(0, 0, POPUP_W, totalH, 10).fill({ color: 0x1a1a2e });
+    bg.roundRect(0, 0, POPUP_W, totalH, 10).stroke({ color: 0x44446a, width: 1.5 });
+    this.popup.addChild(bg);
+
+    // Title — "Bullet · Lv 1/3"
     const title = new Text({
-      text: `${tower.towerType.charAt(0).toUpperCase() + tower.towerType.slice(1)} Tower`,
-      style: { fontSize: 20, fill: 0xffffff, fontFamily: 'Arial', fontWeight: 'bold' },
+      text: `${tower.towerType.charAt(0).toUpperCase() + tower.towerType.slice(1)} · Lv ${tower.level + 1}/${tower.maxLevel + 1}`,
+      style: { fontSize: 14, fill: 0xffffff, fontFamily: 'Arial', fontWeight: 'bold' },
     });
-    title.x = 15;
-    title.y = 70;
-    this.contentContainer.addChild(title);
+    title.x = PAD;
+    title.y = titleY;
+    this.popup.addChild(title);
 
-    const levelText = new Text({ text: `Level: ${tower.level + 1}/${tower.maxLevel + 1}`, style });
-    levelText.x = 15;
-    levelText.y = 100;
-    this.contentContainer.addChild(levelText);
-
-    const stats = tower.stats;
+    // Current stats
+    const s = tower.stats;
     const statsText = new Text({
-      text: `DMG: ${stats.damage}\nRate: ${stats.fireRate}ms\nRange: ${stats.range}`,
-      style: { ...style, fontSize: 13, lineHeight: 20 },
+      text: `DMG ${s.damage}  Rate ${s.fireRate}ms  Rng ${s.range}`,
+      style: { fontSize: 11, fill: COLORS.textSecondary, fontFamily: 'Arial' },
     });
-    statsText.x = 15;
-    statsText.y = 125;
-    this.contentContainer.addChild(statsText);
+    statsText.x = PAD;
+    statsText.y = statsY;
+    this.popup.addChild(statsText);
 
-    if (tower.canUpgrade) {
-      const nextStats = TOWER_CONFIGS[tower.towerType].levels[tower.level + 1];
-      const upgradeBtn = new Button(`Upgrade ($${nextStats.cost})`, 190, 40, 0x2980b9);
-      upgradeBtn.x = 15;
-      upgradeBtn.y = 200;
-      upgradeBtn.disabled = coins < nextStats.cost;
-      upgradeBtn.on('pointertap', () => {
-        this.onUpgrade?.(tower);
-        this.close();
-      });
-      this.contentContainer.addChild(upgradeBtn);
-
-      const nextText = new Text({
-        text: `→ DMG: ${nextStats.damage}, Rate: ${nextStats.fireRate}ms`,
+    // Next-level hint
+    if (showHint && nextStats) {
+      const hint = new Text({
+        text: `→ DMG ${nextStats.damage}  Rate ${nextStats.fireRate}ms  Rng ${nextStats.range}`,
         style: { fontSize: 11, fill: COLORS.textGold, fontFamily: 'Arial' },
       });
-      nextText.x = 15;
-      nextText.y = 250;
-      this.contentContainer.addChild(nextText);
+      hint.x = PAD;
+      hint.y = hintY;
+      this.popup.addChild(hint);
     }
 
-    const sellBtn = new Button(`Sell ($${tower.sellValue})`, 190, 40, 0xc0392b);
-    sellBtn.x = 15;
-    sellBtn.y = tower.canUpgrade ? 280 : 200;
-    sellBtn.on('pointertap', () => {
-      this.onSell?.(tower);
-      this.close();
-    });
-    this.contentContainer.addChild(sellBtn);
+    // ── Buttons ─────────────────────────────────────────────────────
+    if (canUpgrade && nextStats) {
+      const upgW = 128;
+      const sellW = POPUP_W - PAD * 2 - upgW - 6;
+
+      const upgBtn = this.makeBtn(
+        `Upgrade $${nextStats.cost}`,
+        upgW,
+        canAffordUpgrade ? 0x2980b9 : 0x3a3a5a,
+      );
+      upgBtn.alpha = canAffordUpgrade ? 1 : 0.7;
+      upgBtn.x = PAD;
+      upgBtn.y = btnY;
+      if (canAffordUpgrade) {
+        upgBtn.interactive = true;
+        upgBtn.cursor = 'pointer';
+        upgBtn.on('pointertap', (e) => {
+          e.stopPropagation();
+          this.onUpgrade?.(tower);
+          this.close();
+        });
+      }
+      this.popup.addChild(upgBtn);
+
+      const sellBtn = this.makeBtn(`Sell $${tower.sellValue}`, sellW, 0xc0392b);
+      sellBtn.x = PAD + upgW + 6;
+      sellBtn.y = btnY;
+      sellBtn.interactive = true;
+      sellBtn.cursor = 'pointer';
+      sellBtn.on('pointertap', (e) => {
+        e.stopPropagation();
+        this.onSell?.(tower);
+        this.close();
+      });
+      this.popup.addChild(sellBtn);
+    } else {
+      // Max level — sell spans full width
+      const sellBtn = this.makeBtn(`Sell $${tower.sellValue}`, POPUP_W - PAD * 2, 0xc0392b);
+      sellBtn.x = PAD;
+      sellBtn.y = btnY;
+      sellBtn.interactive = true;
+      sellBtn.cursor = 'pointer';
+      sellBtn.on('pointertap', (e) => {
+        e.stopPropagation();
+        this.onSell?.(tower);
+        this.close();
+      });
+      this.popup.addChild(sellBtn);
+    }
+
+    // ── Position above/below the tower, clamped to screen ───────────
+    let px = tower.x - POPUP_W / 2;
+    let py = tower.y - CELL_SIZE / 2 - totalH - 6;
+
+    px = Math.max(4, Math.min(px, this.sw - POPUP_W - 4));
+    if (py < HUD_HEIGHT + 4) {
+      py = tower.y + CELL_SIZE / 2 + 6;
+    }
+
+    this.popup.x = Math.round(px);
+    this.popup.y = Math.round(py);
 
     this.visible = true;
-    this.isOpen = true;
-    this.targetX = 0;
   }
 
   close(): void {
-    this.isOpen = false;
-    this.targetX = -this.panelWidth;
-    this.currentTower = null;
+    if (!this.visible) return;
+    this.visible = false;
     this.onClose?.();
   }
 
-  update(dt: number): void {
-    this.panel.x += (this.targetX - this.panel.x) * 0.2 * dt;
-    if (!this.isOpen && this.panel.x <= -this.panelWidth + 1) {
-      this.visible = false;
-    }
+  update(_dt: number): void {}
+
+  private makeBtn(label: string, w: number, color: number): Container {
+    const c = new Container();
+    const bg = new Graphics();
+    bg.roundRect(0, 0, w, BTN_H, 6).fill({ color });
+    c.addChild(bg);
+
+    const t = new Text({
+      text: label,
+      style: { fontSize: 12, fill: 0xffffff, fontFamily: 'Arial', fontWeight: 'bold' },
+    });
+    t.anchor.set(0.5);
+    t.x = w / 2;
+    t.y = BTN_H / 2;
+    c.addChild(t);
+    return c;
   }
 }

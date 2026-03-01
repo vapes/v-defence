@@ -154,6 +154,8 @@ export class GameScene extends Container implements Scene {
 
   private onCellClick(cell: Cell): void {
     this.towerManager.deselectAll();
+    this.buildMenu.close();
+    this.upgradeMenu.close();
 
     if (cell.tower) {
       cell.tower.setShowRange(true);
@@ -165,7 +167,10 @@ export class GameScene extends Container implements Scene {
       if (this.tutorial && this.tutorial.step === TutorialStep.TapCell) {
         this.tutorial.showStep(TutorialStep.BuildTower);
       }
-      this.buildMenu.open(this.level.availableTowers, this.coins);
+      const pos = this.grid.getCellWorldPos(cell.row, cell.col);
+      this.buildMenu.open(this.level.availableTowers, this.coins, pos.x, pos.y);
+    } else {
+      this.selectedCell = null;
     }
   }
 
