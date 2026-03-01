@@ -1,0 +1,69 @@
+{
+  "id": 16,
+  "name": "The Spiral",
+  "startingMoney": 375,
+  "lives": 5,
+  "availableTowers": ["bullet", "laser", "mortar", "cryo", "alchemist", "gold_mine", "tesla", "void_beacon", "oracle", "orbital"],
+  "grid": [
+    [2, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 1, 0],
+    [0, 1, 1, 1, 1, 1, 0],
+    [0, 1, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 3, 0, 0, 0, 0]
+  ],
+  "waves": [
+    {
+      "groups": [
+        { "type": "circle", "count": 20, "spawnInterval": 600, "delayBefore": 0 },
+        { "type": "triangle", "count": 12, "spawnInterval": 700, "delayBefore": 7000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "square", "count": 15, "spawnInterval": 750, "delayBefore": 0 },
+        { "type": "triangle", "count": 18, "spawnInterval": 480, "delayBefore": 5000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 12, "spawnInterval": 1300, "delayBefore": 0 },
+        { "type": "square", "count": 15, "spawnInterval": 550, "delayBefore": 8000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "triangle", "count": 25, "spawnInterval": 350, "delayBefore": 0 },
+        { "type": "hexagon", "count": 12, "spawnInterval": 1100, "delayBefore": 6000 },
+        { "type": "square", "count": 15, "spawnInterval": 550, "delayBefore": 7000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 16, "spawnInterval": 950, "delayBefore": 0 },
+        { "type": "square", "count": 22, "spawnInterval": 380, "delayBefore": 9000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 23000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 20, "spawnInterval": 850, "delayBefore": 0 },
+        { "type": "square", "count": 26, "spawnInterval": 330, "delayBefore": 11000 },
+        { "type": "triangle", "count": 20, "spawnInterval": 330, "delayBefore": 3000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 26, "spawnInterval": 730, "delayBefore": 0 },
+        { "type": "square", "count": 30, "spawnInterval": 300, "delayBefore": 14000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 32000 }
+      ]
+    }
+  ]
+}

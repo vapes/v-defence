@@ -1,0 +1,68 @@
+{
+  "id": 14,
+  "name": "The Narrows",
+  "startingMoney": 350,
+  "lives": 6,
+  "availableTowers": ["bullet", "laser", "mortar", "cryo", "alchemist", "gold_mine", "tesla", "void_beacon", "oracle"],
+  "grid": [
+    [0, 0, 0, 2, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0],
+    [0, 1, 1, 1, 1, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0],
+    [0, 0, 0, 0, 3, 0, 0]
+  ],
+  "waves": [
+    {
+      "groups": [
+        { "type": "circle", "count": 18, "spawnInterval": 600, "delayBefore": 0 },
+        { "type": "triangle", "count": 10, "spawnInterval": 700, "delayBefore": 6000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "square", "count": 12, "spawnInterval": 800, "delayBefore": 0 },
+        { "type": "triangle", "count": 15, "spawnInterval": 500, "delayBefore": 5000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 10, "spawnInterval": 1400, "delayBefore": 0 },
+        { "type": "square", "count": 12, "spawnInterval": 600, "delayBefore": 7000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "triangle", "count": 20, "spawnInterval": 400, "delayBefore": 0 },
+        { "type": "hexagon", "count": 10, "spawnInterval": 1200, "delayBefore": 6000 },
+        { "type": "square", "count": 12, "spawnInterval": 600, "delayBefore": 7000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 15, "spawnInterval": 1000, "delayBefore": 0 },
+        { "type": "square", "count": 20, "spawnInterval": 400, "delayBefore": 8000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 22000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 18, "spawnInterval": 900, "delayBefore": 0 },
+        { "type": "square", "count": 22, "spawnInterval": 380, "delayBefore": 10000 },
+        { "type": "triangle", "count": 15, "spawnInterval": 400, "delayBefore": 3000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 22, "spawnInterval": 800, "delayBefore": 0 },
+        { "type": "square", "count": 25, "spawnInterval": 330, "delayBefore": 12000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 28000 }
+      ]
+    }
+  ]
+}

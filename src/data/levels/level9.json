@@ -1,0 +1,61 @@
+{
+  "id": 9,
+  "name": "The S-Curve",
+  "startingMoney": 300,
+  "lives": 7,
+  "availableTowers": ["bullet", "laser", "mortar", "cryo", "alchemist", "gold_mine", "tesla"],
+  "grid": [
+    [0, 0, 0, 0, 2, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0],
+    [0, 1, 1, 1, 1, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 3, 0]
+  ],
+  "waves": [
+    {
+      "groups": [
+        { "type": "circle", "count": 15, "spawnInterval": 700, "delayBefore": 0 },
+        { "type": "triangle", "count": 8, "spawnInterval": 800, "delayBefore": 5000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "square", "count": 10, "spawnInterval": 900, "delayBefore": 0 },
+        { "type": "triangle", "count": 12, "spawnInterval": 600, "delayBefore": 4000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 8, "spawnInterval": 1600, "delayBefore": 0 },
+        { "type": "circle", "count": 20, "spawnInterval": 400, "delayBefore": 5000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "triangle", "count": 15, "spawnInterval": 500, "delayBefore": 0 },
+        { "type": "hexagon", "count": 6, "spawnInterval": 1400, "delayBefore": 5000 },
+        { "type": "square", "count": 8, "spawnInterval": 700, "delayBefore": 6000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 10, "spawnInterval": 1200, "delayBefore": 0 },
+        { "type": "square", "count": 12, "spawnInterval": 600, "delayBefore": 6000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 16000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 14, "spawnInterval": 1000, "delayBefore": 0 },
+        { "type": "square", "count": 15, "spawnInterval": 500, "delayBefore": 8000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 20000 }
+      ]
+    }
+  ]
+}

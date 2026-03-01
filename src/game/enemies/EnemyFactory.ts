@@ -5,6 +5,7 @@ import { CircleEnemy } from './CircleEnemy';
 import { TriangleEnemy } from './TriangleEnemy';
 import { HexagonEnemy } from './HexagonEnemy';
 import { SquareEnemy } from './SquareEnemy';
+import { PentagonEnemy } from './PentagonEnemy';
 
 export class EnemyFactory {
   static create(type: EnemyType, waveMultiplier: number = 1): Enemy {
@@ -19,6 +20,8 @@ export class EnemyFactory {
         return new HexagonEnemy(health, cfg.speed, cfg.reward, cfg.color);
       case 'square':
         return new SquareEnemy(health, cfg.speed, cfg.reward, cfg.color);
+      case 'pentagon':
+        return new PentagonEnemy(health, cfg.speed, cfg.reward, cfg.color);
       default:
         throw new Error(`Enemy type "${type}" is not yet implemented`);
     }

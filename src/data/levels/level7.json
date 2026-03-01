@@ -1,0 +1,61 @@
+{
+  "id": 7,
+  "name": "The Zigzag",
+  "startingMoney": 300,
+  "lives": 8,
+  "availableTowers": ["bullet", "laser", "mortar", "cryo", "alchemist"],
+  "grid": [
+    [0, 2, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 0],
+    [0, 1, 1, 1, 1, 1, 0],
+    [0, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 3, 0, 0, 0, 0]
+  ],
+  "waves": [
+    {
+      "groups": [
+        { "type": "circle", "count": 12, "spawnInterval": 800, "delayBefore": 0 },
+        { "type": "triangle", "count": 6, "spawnInterval": 800, "delayBefore": 4000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "square", "count": 8, "spawnInterval": 1000, "delayBefore": 0 },
+        { "type": "triangle", "count": 10, "spawnInterval": 700, "delayBefore": 3000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 6, "spawnInterval": 1800, "delayBefore": 0 },
+        { "type": "circle", "count": 18, "spawnInterval": 400, "delayBefore": 4000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "triangle", "count": 15, "spawnInterval": 600, "delayBefore": 0 },
+        { "type": "hexagon", "count": 5, "spawnInterval": 1500, "delayBefore": 5000 },
+        { "type": "square", "count": 5, "spawnInterval": 900, "delayBefore": 5000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 8, "spawnInterval": 1200, "delayBefore": 0 },
+        { "type": "square", "count": 10, "spawnInterval": 700, "delayBefore": 5000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 14000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 12, "spawnInterval": 1000, "delayBefore": 0 },
+        { "type": "square", "count": 12, "spawnInterval": 600, "delayBefore": 7000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 18000 }
+      ]
+    }
+  ]
+}
