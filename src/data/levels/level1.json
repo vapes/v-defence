@@ -1,0 +1,42 @@
+{
+  "id": 1,
+  "name": "The Straight Path",
+  "startingMoney": 200,
+  "lives": 10,
+  "availableTowers": ["bullet"],
+  "grid": [
+    [0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 1, 1, 1, 0],
+    [0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 0, 3, 0, 0, 0]
+  ],
+  "waves": [
+    {
+      "groups": [
+        { "type": "circle", "count": 1, "spawnInterval": 1500, "delayBefore": 0 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "circle", "count": 2, "spawnInterval": 1000, "delayBefore": 0 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "circle", "count": 3, "spawnInterval": 800, "delayBefore": 0 },
+        { "type": "triangle", "count": 1, "spawnInterval": 1200, "delayBefore": 2000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "circle", "count": 4, "spawnInterval": 600, "delayBefore": 0 },
+        { "type": "triangle", "count": 2, "spawnInterval": 800, "delayBefore": 1500 }
+      ]
+    }
+  ]
+}
