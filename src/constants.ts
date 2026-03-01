@@ -21,6 +21,7 @@ export const COLORS = {
 };
 
 export const HUD_HEIGHT = 50;
+export const TOWER_BAR_HEIGHT = 90;
 export const SELL_REFUND_RATIO = 0.7;
 export const COUNTDOWN_SECONDS = 5;
 

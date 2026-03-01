@@ -1,5 +1,5 @@
 import { Container, Graphics, Text } from 'pixi.js';
-import { CELL_SIZE, COLORS } from '../constants';
+import { CELL_SIZE, TOWER_BAR_HEIGHT } from '../constants';
 
 export enum TutorialStep {
   TapCell = 0,
@@ -76,13 +76,13 @@ export class Tutorial extends Container {
     switch (step) {
       case TutorialStep.TapCell:
         this._paused = true;
-        this.setMessage('Tap a green cell next to the path\nto place a tower');
+        this.setMessage('Drag a tower from the bottom bar\nto a green cell next to the path');
         this.highlightGfx.visible = true;
         break;
 
       case TutorialStep.BuildTower:
         this._paused = true;
-        this.setMessage('Select "Bullet" to build your first tower');
+        this.setMessage('Drop the tower on the highlighted cell');
         this.highlightGfx.visible = false;
         break;
 
@@ -136,7 +136,7 @@ export class Tutorial extends Container {
     const boxW = this.screenWidth - 40;
     const boxH = 70;
     const boxX = 20;
-    const boxY = this.screenHeight - boxH - 20;
+    const boxY = this.screenHeight - TOWER_BAR_HEIGHT - boxH - 10;
 
     this.messageBox.clear();
     this.messageBox.roundRect(boxX, boxY, boxW, boxH, 10).fill({ color: 0x000000, alpha: 0.8 });
