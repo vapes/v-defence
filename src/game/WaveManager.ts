@@ -92,8 +92,7 @@ export class WaveManager {
         this.countdownTime -= ms;
         this.onCountdownTick?.(Math.ceil(this.countdownTime / 1000));
         if (this.countdownTime <= 0) {
-          this.state = WaveState.Building;
-          this.onBuildPhaseStart?.(this.currentWave + 1);
+          this.startNextWave();
         }
         break;
     }
