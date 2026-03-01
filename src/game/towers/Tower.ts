@@ -1,7 +1,7 @@
 import { Container, Graphics } from 'pixi.js';
 import { TowerType, TowerLevelStats } from '../../types';
 import { Enemy } from '../enemies/Enemy';
-import { TOWER_CONFIGS } from '../../data/tower-stats';
+import TOWER_CONFIGS from '../../data/tower-configs.json';
 
 export abstract class Tower extends Container {
   abstract readonly towerType: TowerType;
