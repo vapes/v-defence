@@ -1,7 +1,7 @@
 {
   "id": 1,
   "name": "The Straight Path",
-  "startingMoney": 200,
+  "startingMoney": 300,
   "lives": 10,
   "availableTowers": ["bullet"],
   "grid": [
@@ -17,7 +17,7 @@
   ],
   "waves": [
     {
-      "comment": "Волна 1: Обучение. Хватает на 1-2 башни Lvl 1. Враги очень слабые.",
+      "comment": "Волна 1: Обучение. 300 монет — хватает на 3 башни Lvl 1. Враги очень слабые.",
       "groups": [
         { "type": "circle", "count": 5, "spawnInterval": 2000, "delayBefore": 1000 }
       ]
@@ -37,10 +37,10 @@
       ]
     },
     {
-      "comment": "Волна 4: ФИНАЛ. 4 Танка с 600 HP. Суммарное HP = 2400. Без двух башен Lvl 3 (DPS 250) они дойдут до финиша за 10 секунд.",
+      "comment": "Волна 4: ФИНАЛ. 2 Танка с 300 HP (×1.45 = 435). 2 башни Lvl 2 (90 DPS) убивают каждого за ~5s обстрела — меньше, чем время прохода (17s).",
       "groups": [
-        { "type": "hexagon", "count": 4, "spawnInterval": 4000, "delayBefore": 0 },
-        { "type": "triangle", "count": 5, "spawnInterval": 1000, "delayBefore": 2000 }
+        { "type": "hexagon", "count": 2, "spawnInterval": 4000, "delayBefore": 0 },
+        { "type": "triangle", "count": 3, "spawnInterval": 1200, "delayBefore": 3000 }
       ]
     }
   ]
