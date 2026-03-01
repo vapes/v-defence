@@ -1,7 +1,7 @@
 import { Container, Graphics, Text } from 'pixi.js';
 import { COLORS, CELL_SIZE, HUD_HEIGHT } from '../constants';
 import { Tower } from '../game/towers/Tower';
-import { TOWER_CONFIGS } from '../data/tower-stats';
+import TOWER_CONFIGS from '../data/tower-configs.json';
 
 const POPUP_W = 224;
 const PAD = 10;
