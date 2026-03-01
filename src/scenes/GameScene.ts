@@ -16,7 +16,6 @@ import { TowerBar } from '../ui/TowerBar';
 import { UpgradeMenu } from '../ui/UpgradeMenu';
 import { CoinAnimation } from '../ui/CoinAnimation';
 import { WaveCountdown } from '../ui/WaveCountdown';
-import { Tutorial, TutorialStep } from '../ui/Tutorial';
 import { VictoryScene } from './VictoryScene';
 import { DefeatScene } from './DefeatScene';
 import { Cell } from '../game/Cell';
@@ -36,8 +35,6 @@ export class GameScene extends Container implements Scene {
   private upgradeMenu!: UpgradeMenu;
   private coinAnim!: CoinAnimation;
   private waveCountdown!: WaveCountdown;
-  private tutorial: Tutorial | null = null;
-
   private coins: number = 0;
   private lives: number = 0;
   private gameOver: boolean = false;
@@ -93,18 +90,18 @@ export class GameScene extends Container implements Scene {
     this.coinAnim = new CoinAnimation();
     this.addChild(this.coinAnim);
 
-    // Wave countdown
-    this.waveCountdown = new WaveCountdown(w, h);
-    this.addChild(this.waveCountdown);
-
     // Upgrade menu (still used for placed towers)
     this.upgradeMenu = new UpgradeMenu(w, h);
     this.addChild(this.upgradeMenu);
 
-    // Tower bar (bottom, always on top)
+    // Tower bar (bottom)
     this.towerBar = new TowerBar(w, h);
     this.towerBar.setTowers(this.level.availableTowers, this.coins);
     this.addChild(this.towerBar);
+
+    // Wave countdown (above tower bar)
+    this.waveCountdown = new WaveCountdown(w, h);
+    this.addChild(this.waveCountdown);
 
     // Wire events
     this.grid.onCellClick = (cell) => this.onCellClick(cell);
@@ -159,19 +156,7 @@ export class GameScene extends Container implements Scene {
       this.towerManager.deselectAll();
     };
 
-    // Tutorial for level 1
-    if (this.level.id === 1) {
-      this.tutorial = new Tutorial(w, h);
-      const hlPos = this.grid.getCellWorldPos(1, 3);
-      this.tutorial.highlightWorldX = hlPos.x;
-      this.tutorial.highlightWorldY = hlPos.y;
-      this.tutorial.onComplete = () => {
-        this.waveManager.init(this.level.waves);
-      };
-      this.addChild(this.tutorial);
-    } else {
-      this.waveManager.init(this.level.waves);
-    }
+    this.waveManager.init(this.level.waves);
   }
 
   private onCellClick(cell: Cell): void {
@@ -312,12 +297,6 @@ export class GameScene extends Container implements Scene {
     this.towerManager.add(tower);
     this.selectedCell = null;
 
-    // Advance tutorial: drag-and-drop counts as the full build action
-    if (this.tutorial &&
-        (this.tutorial.step === TutorialStep.TapCell ||
-         this.tutorial.step === TutorialStep.BuildTower)) {
-      this.tutorial.showStep(TutorialStep.TowerBuilt);
-    }
   }
 
   private upgradeTower(tower: Tower): void {
@@ -352,8 +331,6 @@ export class GameScene extends Container implements Scene {
     this.projectileManager.update(dt);
     this.coinAnim.update(dt);
     this.upgradeMenu.update(dt);
-    this.tutorial?.update(dt);
-
     if (this.waveManager.state === WaveState.Complete && this.enemyManager.activeCount === 0 && !this.gameOver) {
       this.gameOver = true;
       this.sceneManager.goTo(new VictoryScene(this.sceneManager, this.level.id));

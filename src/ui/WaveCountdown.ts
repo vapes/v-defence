@@ -1,5 +1,5 @@
 import { Container, Graphics, Text } from 'pixi.js';
-import { COLORS } from '../constants';
+import { COLORS, TOWER_BAR_HEIGHT } from '../constants';
 
 export class WaveCountdown extends Container {
   private countdownText: Text;
@@ -29,7 +29,7 @@ export class WaveCountdown extends Container {
     const panelW = screenWidth - 40;
     const panelH = 90;
     const panelX = 20;
-    const panelY = screenHeight - 110;
+    const panelY = screenHeight - TOWER_BAR_HEIGHT - panelH - 10;
 
     const bg = new Graphics();
     bg.roundRect(panelX, panelY, panelW, panelH, 10).fill({ color: COLORS.hudBackground, alpha: 0.92 });
