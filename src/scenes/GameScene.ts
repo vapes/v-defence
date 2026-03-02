@@ -191,8 +191,9 @@ export class GameScene extends Container implements Scene {
 
     ghost.alpha = 0.65;
     ghost.setShowRange(true);
-    ghost.x = x;
-    ghost.y = y;
+    const dp = this.sceneManager.toDesign(x, y);
+    ghost.x = dp.x;
+    ghost.y = dp.y;
 
     this.isDragging = true;
     this.dragType = type;
@@ -213,8 +214,7 @@ export class GameScene extends Container implements Scene {
   private readonly handleDragMove = (e: PointerEvent): void => {
     if (!this.isDragging || !this.dragGhost) return;
 
-    const wx = e.clientX;
-    const wy = e.clientY;
+    const { x: wx, y: wy } = this.sceneManager.toDesign(e.clientX, e.clientY);
 
     const cellPos = this.grid.getCellAtWorldPos(wx, wy);
     if (cellPos) {

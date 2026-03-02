@@ -16,6 +16,21 @@ async function init() {
   document.body.appendChild(app.canvas);
 
   const sceneManager = new SceneManager(app);
+
+  function applyScale() {
+    const scale = Math.min(window.innerWidth / DESIGN_WIDTH, window.innerHeight / DESIGN_HEIGHT);
+    const ox = (window.innerWidth - DESIGN_WIDTH * scale) / 2;
+    const oy = (window.innerHeight - DESIGN_HEIGHT * scale) / 2;
+    app.stage.scale.set(scale);
+    app.stage.position.set(ox, oy);
+    sceneManager.stageScale = scale;
+    sceneManager.stageOffsetX = ox;
+    sceneManager.stageOffsetY = oy;
+  }
+
+  applyScale();
+  window.addEventListener('resize', applyScale);
+
   sceneManager.goTo(new LevelSelectScene(sceneManager));
 }
 
