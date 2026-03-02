@@ -1,0 +1,53 @@
+{
+  "id": 0,
+  "name": "DEV Sandbox",
+  "startingMoney": 5000,
+  "lives": 99,
+  "availableTowers": ["bullet", "laser", "tesla", "mortar", "cryo", "alchemist", "gold_mine", "void_beacon", "oracle", "orbital"],
+  "grid": [
+    [2, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 0],
+    [0, 1, 1, 1, 1, 1, 0],
+    [0, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 0],
+    [0, 1, 1, 1, 1, 1, 0],
+    [0, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 3, 0, 0]
+  ],
+  "waves": [
+    {
+      "groups": [
+        { "type": "circle", "count": 15, "spawnInterval": 600, "delayBefore": 0 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "circle", "count": 10, "spawnInterval": 500, "delayBefore": 0 },
+        { "type": "triangle", "count": 8, "spawnInterval": 400, "delayBefore": 3000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 5, "spawnInterval": 1500, "delayBefore": 0 },
+        { "type": "circle", "count": 20, "spawnInterval": 300, "delayBefore": 2000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "square", "count": 8, "spawnInterval": 800, "delayBefore": 0 },
+        { "type": "triangle", "count": 15, "spawnInterval": 300, "delayBefore": 2000 },
+        { "type": "hexagon", "count": 3, "spawnInterval": 2000, "delayBefore": 5000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "circle", "count": 30, "spawnInterval": 200, "delayBefore": 0 },
+        { "type": "square", "count": 10, "spawnInterval": 600, "delayBefore": 3000 },
+        { "type": "pentagon", "count": 2, "spawnInterval": 5000, "delayBefore": 8000 }
+      ]
+    }
+  ],
+  "solution": "place mortar at 3,3 - upgrade mortar at 3,3 - place mortar at 5,3 - upgrade mortar at 5,3 - place mortar at 1,3 - upgrade mortar at 1,3 - place mortar at 3,4 - upgrade mortar at 3,4 - place mortar at 5,2 - upgrade mortar at 5,2 - place mortar at 7,3 - upgrade mortar at 7,3 - place mortar at 1,2 - upgrade mortar at 1,2 - place cryo at 1,4 - place bullet at 3,2 - place cryo at 5,4 - place mortar at 7,2 - place mortar at 7,4 - place mortar at 3,5 - place bullet at 1,1 - place cryo at 5,1 - place bullet at 9,3 - place bullet at 1,0 - place mortar at 2,0 - place mortar at 2,6 - place cryo at 1,6 - place bullet at 3,0 - place mortar at 4,0 - place mortar at 4,6 - place cryo at 5,6 - place cryo at 7,0 - upgrade mortar at 7,4 - upgrade mortar at 7,2"
+}

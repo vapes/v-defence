@@ -35,25 +35,25 @@
     "alchemist": {
       "type": "dot_debuff",
       "levels": [
-        { "level": 1, "dotDamage": 5, "dotDuration": 3.0, "range": 110, "cost": 150 },
-        { "level": 2, "dotDamage": 15, "dotDuration": 5.0, "range": 130, "cost": 250 },
-        { "level": 3, "dotDamage": 40, "dotDuration": 7.0, "armorShred": 0.5, "range": 150, "cost": 500 }
+        { "level": 1, "dotDamage": 5, "dotDuration": 3.0, "fireRate": 2000, "range": 110, "cost": 150 },
+        { "level": 2, "dotDamage": 15, "dotDuration": 5.0, "fireRate": 2000, "range": 130, "cost": 250 },
+        { "level": 3, "dotDamage": 40, "dotDuration": 7.0, "fireRate": 2000, "armorShred": 0.5, "range": 150, "cost": 500 }
       ]
     },
     "gold_mine": {
       "type": "economy",
       "levels": [
-        { "level": 1, "income": 20, "interval": 10.0, "cost": 200 },
-        { "level": 2, "income": 60, "interval": 10.0, "cost": 300 },
-        { "level": 3, "income": 150, "killBonus": 0.05, "interval": 10.0, "cost": 600 }
+        { "level": 1, "income": 20, "interval": 10.0, "range": 0, "cost": 200 },
+        { "level": 2, "income": 60, "interval": 10.0, "range": 0, "cost": 300 },
+        { "level": 3, "income": 150, "killBonus": 0.05, "interval": 10.0, "range": 150, "cost": 600 }
       ]
     },
     "tesla": {
       "type": "chain_lightning",
       "levels": [
-        { "level": 1, "damage": 15, "chainTargets": 3, "range": 100, "cost": 180 },
-        { "level": 2, "damage": 30, "chainTargets": 5, "range": 120, "cost": 250 },
-        { "level": 3, "damage": 60, "chainTargets": 8, "strikeChance": 0.1, "strikeDamage": 200, "range": 140, "cost": 500 }
+        { "level": 1, "damage": 15, "fireRate": 1000, "chainTargets": 3, "range": 100, "cost": 180 },
+        { "level": 2, "damage": 30, "fireRate": 1000, "chainTargets": 5, "range": 120, "cost": 250 },
+        { "level": 3, "damage": 60, "fireRate": 1000, "chainTargets": 8, "strikeChance": 0.1, "strikeDamage": 200, "range": 140, "cost": 500 }
       ]
     },
     "void_beacon": {

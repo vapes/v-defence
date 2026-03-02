@@ -9,6 +9,7 @@ import { ProjectileManager } from '../game/ProjectileManager';
 import { WaveManager } from '../game/WaveManager';
 import { TowerFactory } from '../game/towers/TowerFactory';
 import { Tower } from '../game/towers/Tower';
+import { GoldMineTower } from '../game/towers/GoldMineTower';
 import { Bullet } from '../game/projectiles/Bullet';
 import { LaserBeam } from '../game/projectiles/LaserBeam';
 import { HUD } from '../ui/HUD';
@@ -16,6 +17,7 @@ import { TowerBar } from '../ui/TowerBar';
 import { UpgradeMenu } from '../ui/UpgradeMenu';
 import { CoinAnimation } from '../ui/CoinAnimation';
 import { WaveCountdown } from '../ui/WaveCountdown';
+import { NewTowerPopup, getNewTowersForLevel } from '../ui/NewTowerPopup';
 import { VictoryScene } from './VictoryScene';
 import { DefeatScene } from './DefeatScene';
 import { Cell } from '../game/Cell';
@@ -35,9 +37,11 @@ export class GameScene extends Container implements Scene {
   private upgradeMenu!: UpgradeMenu;
   private coinAnim!: CoinAnimation;
   private waveCountdown!: WaveCountdown;
+  private newTowerPopup!: NewTowerPopup;
   private coins: number = 0;
   private lives: number = 0;
   private gameOver: boolean = false;
+  private introPopupActive: boolean = false;
 
   private selectedCell: Cell | null = null;
 
@@ -107,7 +111,18 @@ export class GameScene extends Container implements Scene {
     this.grid.onCellClick = (cell) => this.onCellClick(cell);
 
     this.enemyManager.onEnemyKilled = (enemy) => {
-      this.coins += enemy.reward;
+      let bonus = 0;
+      for (const t of this.towerManager.towers) {
+        if (t.towerType !== 'gold_mine') continue;
+        const kb = t.stats.killBonus ?? 0;
+        if (kb <= 0) continue;
+        const dx = enemy.x - t.x;
+        const dy = enemy.y - t.y;
+        if (Math.sqrt(dx * dx + dy * dy) <= (t.stats.range ?? 0)) {
+          bonus += Math.round(enemy.reward * kb);
+        }
+      }
+      this.coins += enemy.reward + bonus;
       this.hud.coins = this.coins;
       this.towerBar.setTowers(this.level.availableTowers, this.coins);
       const hudPos = this.hud.coinTextPosition;
@@ -156,11 +171,25 @@ export class GameScene extends Container implements Scene {
       this.towerManager.deselectAll();
     };
 
-    this.waveManager.init(this.level.waves);
+    // New tower intro popup
+    this.newTowerPopup = new NewTowerPopup(w, h);
+    this.addChild(this.newTowerPopup);
+
+    const newTowers = getNewTowersForLevel(this.level.id);
+    if (newTowers.length > 0) {
+      this.introPopupActive = true;
+      this.newTowerPopup.onDone = () => {
+        this.introPopupActive = false;
+        this.waveManager.init(this.level.waves);
+      };
+      this.newTowerPopup.show(newTowers);
+    } else {
+      this.waveManager.init(this.level.waves);
+    }
   }
 
   private onCellClick(cell: Cell): void {
-    if (this.isDragging) return;
+    if (this.isDragging || this.introPopupActive) return;
 
     this.towerManager.deselectAll();
     this.upgradeMenu.close();
@@ -177,7 +206,7 @@ export class GameScene extends Container implements Scene {
   // ── Drag-and-drop ────────────────────────────────────────────────────────────
 
   private startTowerDrag(type: TowerType, x: number, y: number): void {
-    if (this.isDragging || this.gameOver) return;
+    if (this.isDragging || this.gameOver || this.introPopupActive) return;
 
     const cost = TOWER_CONFIGS[type].levels[0].cost;
     if (this.coins < cost) return;
@@ -285,13 +314,27 @@ export class GameScene extends Container implements Scene {
     tower.y = pos.y;
     tower.totalInvested = cost;
 
-    tower.onFire = (t, target) => {
-      if (t.towerType === 'bullet') {
-        this.projectileManager.add(new Bullet(t.stats.damage ?? 0, target, t.x, t.y));
-      } else {
-        this.projectileManager.add(new LaserBeam(t.stats.damage ?? 0, target, t.x, t.y));
-      }
-    };
+    const selfManaged: TowerType[] = [
+      'laser', 'tesla', 'mortar', 'cryo', 'alchemist',
+      'gold_mine', 'void_beacon', 'oracle', 'orbital',
+    ];
+    if (!selfManaged.includes(type)) {
+      tower.onFire = (t, target) => {
+        if (t.towerType === 'bullet') {
+          this.projectileManager.add(new Bullet(t.stats.damage ?? 0, target, t.x, t.y));
+        } else {
+          this.projectileManager.add(new LaserBeam(t.stats.damage ?? 0, target, t.x, t.y));
+        }
+      };
+    }
+
+    if (tower instanceof GoldMineTower) {
+      tower.onGoldGenerated = (amount) => {
+        this.coins += amount;
+        this.hud.coins = this.coins;
+        this.towerBar.setTowers(this.level.availableTowers, this.coins);
+      };
+    }
 
     this.selectedCell.tower = tower;
     this.towerManager.add(tower);
@@ -324,6 +367,9 @@ export class GameScene extends Container implements Scene {
 
   update(dt: number): void {
     if (this.gameOver) return;
+
+    this.newTowerPopup.update(dt);
+    if (this.introPopupActive) return;
 
     this.waveManager.update(dt);
     this.enemyManager.update(dt);

@@ -1,8 +1,8 @@
 {
   "id": 16,
   "name": "The Spiral",
-  "startingMoney": 375,
-  "lives": 5,
+  "startingMoney": 700,
+  "lives": 10,
   "availableTowers": ["bullet", "laser", "mortar", "cryo", "alchemist", "gold_mine", "tesla", "void_beacon", "oracle", "orbital"],
   "grid": [
     [2, 1, 1, 1, 1, 1, 0],
@@ -21,49 +21,43 @@
   "waves": [
     {
       "groups": [
-        { "type": "circle", "count": 20, "spawnInterval": 600, "delayBefore": 0 },
-        { "type": "triangle", "count": 12, "spawnInterval": 700, "delayBefore": 7000 }
+        { "type": "circle", "count": 15, "spawnInterval": 700, "delayBefore": 0 },
+        { "type": "triangle", "count": 8, "spawnInterval": 900, "delayBefore": 4000 }
       ]
     },
     {
       "groups": [
-        { "type": "square", "count": 15, "spawnInterval": 750, "delayBefore": 0 },
-        { "type": "triangle", "count": 18, "spawnInterval": 480, "delayBefore": 5000 }
+        { "type": "triangle", "count": 14, "spawnInterval": 600, "delayBefore": 0 },
+        { "type": "hexagon", "count": 4, "spawnInterval": 2000, "delayBefore": 3000 }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 12, "spawnInterval": 1300, "delayBefore": 0 },
-        { "type": "square", "count": 15, "spawnInterval": 550, "delayBefore": 8000 }
+        { "type": "circle", "count": 18, "spawnInterval": 500, "delayBefore": 0 },
+        { "type": "square", "count": 6, "spawnInterval": 1500, "delayBefore": 4000 }
       ]
     },
     {
       "groups": [
-        { "type": "triangle", "count": 25, "spawnInterval": 350, "delayBefore": 0 },
-        { "type": "hexagon", "count": 12, "spawnInterval": 1100, "delayBefore": 6000 },
-        { "type": "square", "count": 15, "spawnInterval": 550, "delayBefore": 7000 }
+        { "type": "hexagon", "count": 6, "spawnInterval": 1800, "delayBefore": 0 },
+        { "type": "square", "count": 8, "spawnInterval": 1200, "delayBefore": 3000 },
+        { "type": "triangle", "count": 12, "spawnInterval": 700, "delayBefore": 6000 }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 16, "spawnInterval": 950, "delayBefore": 0 },
-        { "type": "square", "count": 22, "spawnInterval": 380, "delayBefore": 9000 },
-        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 23000 }
+        { "type": "hexagon", "count": 8, "spawnInterval": 1500, "delayBefore": 0 },
+        { "type": "square", "count": 8, "spawnInterval": 1000, "delayBefore": 4000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 14000 }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 20, "spawnInterval": 850, "delayBefore": 0 },
-        { "type": "square", "count": 26, "spawnInterval": 330, "delayBefore": 11000 },
-        { "type": "triangle", "count": 20, "spawnInterval": 330, "delayBefore": 3000 }
-      ]
-    },
-    {
-      "groups": [
-        { "type": "hexagon", "count": 26, "spawnInterval": 730, "delayBefore": 0 },
-        { "type": "square", "count": 30, "spawnInterval": 300, "delayBefore": 14000 },
-        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 32000 }
+        { "type": "hexagon", "count": 10, "spawnInterval": 1200, "delayBefore": 0 },
+        { "type": "square", "count": 10, "spawnInterval": 800, "delayBefore": 5000 },
+        { "type": "circle", "count": 18, "spawnInterval": 500, "delayBefore": 8000 }
       ]
     }
-  ]
+  ],
+  "solution": "place mortar at 6,3 - upgrade mortar at 6,3 - place mortar at 5,3 - upgrade mortar at 5,3 - place cryo at 8,3 - place bullet at 1,4 - place cryo at 3,4 - upgrade cryo at 8,3 - upgrade cryo at 3,4 - upgrade bullet at 1,4 - upgrade bullet at 1,4 - upgrade cryo at 8,3 - upgrade cryo at 3,4 - upgrade mortar at 6,3 - upgrade mortar at 5,3"
 }

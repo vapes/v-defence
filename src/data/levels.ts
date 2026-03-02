@@ -1,4 +1,5 @@
 import { LevelConfig } from '../types';
+import levelDev from './levels/level-dev.json';
 import level1 from './levels/level1.json';
 import level2 from './levels/level2.json';
 import level3 from './levels/level3.json';
@@ -20,7 +21,7 @@ import level18 from './levels/level18.json';
 import level19 from './levels/level19.json';
 import level20 from './levels/level20.json';
 
-export const LEVELS: LevelConfig[] = [
+const prodLevels: LevelConfig[] = [
   level1 as LevelConfig,
   level2 as LevelConfig,
   level3 as LevelConfig,
@@ -42,3 +43,7 @@ export const LEVELS: LevelConfig[] = [
   level19 as LevelConfig,
   level20 as LevelConfig,
 ];
+
+export const LEVELS: LevelConfig[] = import.meta.env.DEV
+  ? [levelDev as LevelConfig, ...prodLevels]
+  : prodLevels;

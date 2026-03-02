@@ -18,27 +18,21 @@
   "waves": [
     {
       "groups": [
-        { "type": "circle", "count": 6, "spawnInterval": 1500, "delayBefore": 0 }
+        { "type": "circle", "count": 5, "spawnInterval": 1500, "delayBefore": 0 }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 10, "spawnInterval": 1000, "delayBefore": 0 },
+        { "type": "circle", "count": 8, "spawnInterval": 1000, "delayBefore": 0 },
         { "type": "triangle", "count": 3, "spawnInterval": 1200, "delayBefore": 4000 }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 15, "spawnInterval": 700, "delayBefore": 0 },
+        { "type": "circle", "count": 10, "spawnInterval": 800, "delayBefore": 0 },
         { "type": "triangle", "count": 5, "spawnInterval": 900, "delayBefore": 5000 }
       ]
-    },
-    {
-      "groups": [
-        { "type": "circle", "count": 8, "spawnInterval": 600, "delayBefore": 0 },
-        { "type": "hexagon", "count": 3, "spawnInterval": 2500, "delayBefore": 3000 },
-        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 12000 }
-      ]
     }
-  ]
+  ],
+  "solution": "place bullet at 3,3 - upgrade bullet at 3,3 - place bullet at 5,2 - place bullet at 1,3 - place bullet at 3,2"
 }

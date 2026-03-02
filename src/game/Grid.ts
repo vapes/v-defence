@@ -79,7 +79,7 @@ export class Grid extends Container {
   private setupInteraction(): void {
     this.gridGfx.interactive = true;
     this.gridGfx.on('pointertap', (e) => {
-      const local = e.global;
+      const local = this.gridGfx.toLocal(e.global);
       const col = Math.floor((local.x - this.offsetX) / CELL_SIZE);
       const row = Math.floor((local.y - this.offsetY) / CELL_SIZE);
       if (row >= 0 && row < this.rows && col >= 0 && col < this.cols) {

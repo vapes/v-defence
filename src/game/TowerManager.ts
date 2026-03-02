@@ -27,7 +27,11 @@ export class TowerManager {
 
   update(dt: number, enemies: Enemy[]): void {
     for (const tower of this.towers) {
-      tower.update(dt, enemies);
+      tower.rangeBuff = 0;
+      tower.speedBuff = 0;
+    }
+    for (const tower of this.towers) {
+      tower.update(dt, enemies, this.towers);
     }
   }
 

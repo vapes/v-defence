@@ -1,8 +1,8 @@
 {
   "id": 19,
   "name": "The Siege",
-  "startingMoney": 450,
-  "lives": 5,
+  "startingMoney": 775,
+  "lives": 10,
   "availableTowers": ["bullet", "laser", "mortar", "cryo", "alchemist", "gold_mine", "tesla", "void_beacon", "oracle", "orbital"],
   "grid": [
     [0, 2, 0, 0, 0, 0, 0],
@@ -21,57 +21,43 @@
   "waves": [
     {
       "groups": [
-        { "type": "circle", "count": 22, "spawnInterval": 500, "delayBefore": 0 },
-        { "type": "triangle", "count": 14, "spawnInterval": 600, "delayBefore": 7000 }
+        { "type": "circle", "count": 18, "spawnInterval": 600, "delayBefore": 0 },
+        { "type": "triangle", "count": 10, "spawnInterval": 800, "delayBefore": 5000 }
       ]
     },
     {
       "groups": [
-        { "type": "square", "count": 18, "spawnInterval": 650, "delayBefore": 0 },
-        { "type": "triangle", "count": 22, "spawnInterval": 400, "delayBefore": 5000 }
+        { "type": "triangle", "count": 16, "spawnInterval": 600, "delayBefore": 0 },
+        { "type": "hexagon", "count": 5, "spawnInterval": 2000, "delayBefore": 3000 }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 16, "spawnInterval": 1050, "delayBefore": 0 },
-        { "type": "square", "count": 20, "spawnInterval": 480, "delayBefore": 9000 }
+        { "type": "circle", "count": 20, "spawnInterval": 500, "delayBefore": 0 },
+        { "type": "square", "count": 8, "spawnInterval": 1500, "delayBefore": 4000 }
       ]
     },
     {
       "groups": [
-        { "type": "triangle", "count": 30, "spawnInterval": 290, "delayBefore": 0 },
-        { "type": "hexagon", "count": 16, "spawnInterval": 900, "delayBefore": 7000 },
-        { "type": "square", "count": 20, "spawnInterval": 480, "delayBefore": 8000 }
+        { "type": "hexagon", "count": 8, "spawnInterval": 1800, "delayBefore": 0 },
+        { "type": "square", "count": 10, "spawnInterval": 1000, "delayBefore": 3000 },
+        { "type": "triangle", "count": 14, "spawnInterval": 600, "delayBefore": 6000 }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 20, "spawnInterval": 850, "delayBefore": 0 },
-        { "type": "square", "count": 28, "spawnInterval": 320, "delayBefore": 12000 },
-        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 26000 }
+        { "type": "hexagon", "count": 10, "spawnInterval": 1500, "delayBefore": 0 },
+        { "type": "square", "count": 10, "spawnInterval": 900, "delayBefore": 5000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 16000 }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 26, "spawnInterval": 750, "delayBefore": 0 },
-        { "type": "square", "count": 32, "spawnInterval": 290, "delayBefore": 14000 },
-        { "type": "triangle", "count": 25, "spawnInterval": 290, "delayBefore": 3000 }
-      ]
-    },
-    {
-      "groups": [
-        { "type": "hexagon", "count": 32, "spawnInterval": 650, "delayBefore": 0 },
-        { "type": "square", "count": 38, "spawnInterval": 260, "delayBefore": 16000 },
-        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 37000 }
-      ]
-    },
-    {
-      "groups": [
-        { "type": "hexagon", "count": 36, "spawnInterval": 600, "delayBefore": 0 },
-        { "type": "square", "count": 40, "spawnInterval": 240, "delayBefore": 17000 },
-        { "type": "triangle", "count": 30, "spawnInterval": 260, "delayBefore": 3000 },
-        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 40000 }
+        { "type": "hexagon", "count": 12, "spawnInterval": 1200, "delayBefore": 0 },
+        { "type": "square", "count": 12, "spawnInterval": 800, "delayBefore": 5000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 15000 }
       ]
     }
-  ]
+  ],
+  "solution": "place mortar at 5,3 - upgrade mortar at 5,3 - place cryo at 7,2 - place cryo at 9,3 - place bullet at 7,3 - place cryo at 2,2 - place cryo at 2,4 - place bullet at 4,4 - place cryo at 5,4 - place cryo at 7,4 - place cryo at 9,2 - place bullet at 0,2 - place bullet at 11,3 - place cryo at 4,6 - place cryo at 5,2 - place mortar at 4,3 - place mortar at 8,5 - place mortar at 9,1 - place mortar at 3,2 - place cryo at 5,6 - place bullet at 7,0 - place cryo at 7,5 - place mortar at 10,1 - place bullet at 9,5 - place mortar at 1,4 - place bullet at 0,0 - place bullet at 0,3 - place cryo at 1,0 - place cryo at 2,1 - place mortar at 2,5 - place mortar at 8,0 - place bullet at 3,6 - place cryo at 5,1 - place bullet at 6,0 - place bullet at 6,6 - place cryo at 10,5"
 }
