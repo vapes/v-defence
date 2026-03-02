@@ -1,6 +1,6 @@
 {
   "id": 1,
-  "name": "The Straight Path",
+  "name": "First Steps",
   "startingMoney": 300,
   "lives": 10,
   "availableTowers": ["bullet"],
@@ -9,37 +9,35 @@
     [0, 0, 1, 0, 0, 0, 0],
     [0, 0, 1, 1, 1, 0, 0],
     [0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 1, 1, 0],
-    [0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 1, 1, 1, 0],
-    [0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 3, 0, 0, 0]
+    [0, 1, 1, 1, 1, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 3, 0, 0, 0, 0]
   ],
   "waves": [
     {
-      "comment": "Волна 1: Обучение. 300 монет — хватает на 3 башни Lvl 1. Враги очень слабые.",
       "groups": [
-        { "type": "circle", "count": 5, "spawnInterval": 2000, "delayBefore": 1000 }
+        { "type": "circle", "count": 6, "spawnInterval": 1500, "delayBefore": 0 }
       ]
     },
     {
-      "comment": "Волна 2: Проверка скорости. Появляются треугольники. Нужно апгрейдить первую башню до Lvl 2.",
       "groups": [
         { "type": "circle", "count": 10, "spawnInterval": 1000, "delayBefore": 0 },
-        { "type": "triangle", "count": 3, "spawnInterval": 1500, "delayBefore": 2000 }
+        { "type": "triangle", "count": 3, "spawnInterval": 1200, "delayBefore": 4000 }
       ]
     },
     {
-      "comment": "Волна 3: Накопление ресурсов. Только круги — чтобы избежать проблемы с приоритетом целей (квадраты медленнее кругов, поэтому башни всегда стреляли мимо них). 22 круга дают тот же доход.",
       "groups": [
-        { "type": "circle", "count": 22, "spawnInterval": 500, "delayBefore": 0 }
+        { "type": "circle", "count": 15, "spawnInterval": 700, "delayBefore": 0 },
+        { "type": "triangle", "count": 5, "spawnInterval": 900, "delayBefore": 5000 }
       ]
     },
     {
-      "comment": "Волна 4: ФИНАЛ. 2 Танка с 300 HP (×1.45 = 435). 2 башни Lvl 2 (90 DPS) убивают каждого за ~5s обстрела — меньше, чем время прохода (17s).",
       "groups": [
-        { "type": "hexagon", "count": 2, "spawnInterval": 4000, "delayBefore": 0 },
-        { "type": "triangle", "count": 3, "spawnInterval": 1200, "delayBefore": 3000 }
+        { "type": "circle", "count": 8, "spawnInterval": 600, "delayBefore": 0 },
+        { "type": "hexagon", "count": 3, "spawnInterval": 2500, "delayBefore": 3000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 12000 }
       ]
     }
   ]

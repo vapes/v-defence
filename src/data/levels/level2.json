@@ -1,44 +1,44 @@
 {
   "id": 2,
-  "name": "The Winding Road",
-  "startingMoney": 250,
+  "name": "The Bend",
+  "startingMoney": 275,
   "lives": 10,
   "availableTowers": ["bullet", "laser"],
   "grid": [
-    [2, 1, 1, 1, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 1, 1, 1, 0],
+    [0, 0, 0, 0, 2, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 0],
     [0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 1, 1, 1, 1, 0],
-    [0, 1, 0, 0, 0, 0, 0],
-    [0, 1, 1, 1, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 1, 0],
     [0, 0, 0, 1, 0, 0, 0],
     [0, 0, 0, 3, 0, 0, 0]
   ],
   "waves": [
     {
       "groups": [
-        { "type": "circle", "count": 8, "spawnInterval": 800, "delayBefore": 0 }
+        { "type": "circle", "count": 8, "spawnInterval": 1000, "delayBefore": 0 }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 10, "spawnInterval": 700, "delayBefore": 0 },
-        { "type": "triangle", "count": 5, "spawnInterval": 900, "delayBefore": 2000 }
+        { "type": "circle", "count": 10, "spawnInterval": 800, "delayBefore": 0 },
+        { "type": "triangle", "count": 5, "spawnInterval": 900, "delayBefore": 3000 }
       ]
     },
     {
       "groups": [
-        { "type": "triangle", "count": 8, "spawnInterval": 600, "delayBefore": 0 },
-        { "type": "square", "count": 3, "spawnInterval": 1500, "delayBefore": 3000 }
+        { "type": "triangle", "count": 8, "spawnInterval": 700, "delayBefore": 0 },
+        { "type": "square", "count": 4, "spawnInterval": 1500, "delayBefore": 3000 }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 15, "spawnInterval": 500, "delayBefore": 0 },
-        { "type": "square", "count": 5, "spawnInterval": 1000, "delayBefore": 2000 },
-        { "type": "hexagon", "count": 2, "spawnInterval": 2000, "delayBefore": 4000 }
+        { "type": "circle", "count": 12, "spawnInterval": 600, "delayBefore": 0 },
+        { "type": "square", "count": 5, "spawnInterval": 1200, "delayBefore": 3000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 10000 }
       ]
     }
   ]

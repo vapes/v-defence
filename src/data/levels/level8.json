@@ -1,0 +1,62 @@
+{
+  "id": 8,
+  "name": "Long Road",
+  "startingMoney": 325,
+  "lives": 8,
+  "availableTowers": ["bullet", "laser", "mortar", "cryo", "alchemist", "gold_mine"],
+  "grid": [
+    [0, 0, 0, 2, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 0],
+    [0, 1, 1, 1, 1, 1, 0],
+    [0, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0],
+    [0, 1, 1, 1, 1, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0],
+    [0, 3, 0, 0, 0, 0, 0]
+  ],
+  "waves": [
+    {
+      "groups": [
+        { "type": "circle", "count": 15, "spawnInterval": 700, "delayBefore": 0 },
+        { "type": "triangle", "count": 6, "spawnInterval": 800, "delayBefore": 5000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "square", "count": 8, "spawnInterval": 1000, "delayBefore": 0 },
+        { "type": "triangle", "count": 12, "spawnInterval": 600, "delayBefore": 3000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 6, "spawnInterval": 1800, "delayBefore": 0 },
+        { "type": "circle", "count": 18, "spawnInterval": 400, "delayBefore": 5000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "triangle", "count": 15, "spawnInterval": 500, "delayBefore": 0 },
+        { "type": "hexagon", "count": 6, "spawnInterval": 1500, "delayBefore": 5000 },
+        { "type": "square", "count": 6, "spawnInterval": 800, "delayBefore": 6000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 10, "spawnInterval": 1200, "delayBefore": 0 },
+        { "type": "square", "count": 12, "spawnInterval": 600, "delayBefore": 6000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 16000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 12, "spawnInterval": 1000, "delayBefore": 0 },
+        { "type": "square", "count": 15, "spawnInterval": 500, "delayBefore": 7000 },
+        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 19000 }
+      ]
+    }
+  ]
+}
