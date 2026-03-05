@@ -3,9 +3,9 @@
     "bullet": {
       "type": "projectile",
       "levels": [
-        { "level": 1, "damage": 20, "fireRate": 900, "range": 120, "cost": 100 },
-        { "level": 2, "damage": 45, "fireRate": 750, "range": 150, "cost": 180 },
-        { "level": 3, "damage": 100, "fireRate": 600, "range": 180, "cost": 300 }
+        { "level": 1, "damage": 20, "fireRate": 450, "range": 120, "cost": 100 },
+        { "level": 2, "damage": 45, "fireRate": 375, "range": 150, "cost": 180 },
+        { "level": 3, "damage": 100, "fireRate": 300, "range": 180, "cost": 300 }
       ]
     },
     "laser": {
