@@ -17,7 +17,7 @@ export type TowerType =
   | 'oracle'
   | 'orbital';
 
-export type EnemyType = 'circle' | 'triangle' | 'hexagon' | 'square' | 'pentagon';
+export type EnemyType = 'circle' | 'circle2' | 'triangle' | 'hexagon' | 'square' | 'pentagon';
 
 export interface Point {
   x: number;

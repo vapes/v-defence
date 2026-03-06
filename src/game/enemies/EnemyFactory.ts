@@ -2,6 +2,7 @@ import { EnemyType } from '../../types';
 import { enemies as ENEMY_CONFIGS } from '../../data/game-configs.json';
 import { Enemy } from './Enemy';
 import { CircleEnemy } from './CircleEnemy';
+import { Circle2Enemy } from './Circle2Enemy';
 import { TriangleEnemy } from './TriangleEnemy';
 import { HexagonEnemy } from './HexagonEnemy';
 import { SquareEnemy } from './SquareEnemy';
@@ -14,6 +15,8 @@ export class EnemyFactory {
     switch (type) {
       case 'circle':
         return new CircleEnemy(health, cfg.speed, cfg.reward, cfg.color);
+      case 'circle2':
+        return new Circle2Enemy(health, cfg.speed, cfg.reward, cfg.color);
       case 'triangle':
         return new TriangleEnemy(health, cfg.speed, cfg.reward, cfg.color);
       case 'hexagon':

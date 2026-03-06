@@ -31,14 +31,38 @@
     {
       "groups": [
         { "type": "triangle", "count": 8, "spawnInterval": 800, "delayBefore": 0 },
-        { "type": "hexagon", "count": 2, "spawnInterval": 2000, "delayBefore": 4000 }
+        { "type": "hexagon", "count": 2, "spawnInterval": 2000, "delayBefore": 4000 },
+        { "type": "circle2", "count": 1, "spawnInterval": 1000, "delayBefore": 2000 }
       ]
     },
     {
       "groups": [
         { "type": "circle", "count": 10, "spawnInterval": 700, "delayBefore": 0 },
         { "type": "triangle", "count": 6, "spawnInterval": 800, "delayBefore": 3000 },
-        { "type": "hexagon", "count": 2, "spawnInterval": 2500, "delayBefore": 7000 }
+        { "type": "hexagon", "count": 2, "spawnInterval": 2500, "delayBefore": 7000 },
+        { "type": "circle2", "count": 2, "spawnInterval": 1000, "delayBefore": 1000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "circle", "count": 12, "spawnInterval": 700, "delayBefore": 0 },
+        { "type": "triangle", "count": 8, "spawnInterval": 800, "delayBefore": 3000 },
+        { "type": "circle2", "count": 4, "spawnInterval": 900, "delayBefore": 1000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "circle", "count": 10, "spawnInterval": 700, "delayBefore": 0 },
+        { "type": "triangle", "count": 8, "spawnInterval": 800, "delayBefore": 2000 },
+        { "type": "hexagon", "count": 3, "spawnInterval": 2000, "delayBefore": 6000 },
+        { "type": "circle2", "count": 8, "spawnInterval": 900, "delayBefore": 1000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "triangle", "count": 10, "spawnInterval": 700, "delayBefore": 0 },
+        { "type": "hexagon", "count": 4, "spawnInterval": 2000, "delayBefore": 4000 },
+        { "type": "circle2", "count": 16, "spawnInterval": 800, "delayBefore": 1000 }
       ]
     }
   ],
