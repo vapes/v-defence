@@ -128,6 +128,11 @@ export class BuildMenu extends Container {
       g.circle(0, 0, 13).stroke({ color: 0x333333, width: 1.5 });
       g.rect(-3, -17, 6, 17).fill(0x888888);
       g.rect(-3, -17, 6, 17).stroke({ color: 0x333333, width: 1 });
+    } else if (type === 'magic') {
+      g.circle(0, 0, 13).fill(0x1a0a3e);
+      g.circle(0, 0, 13).stroke({ color: 0x7b1fa2, width: 1.5 });
+      g.circle(0, 0, 7).fill(0xff4400);
+      g.circle(0, 0, 3.5).fill(0xffdd00);
     } else {
       g.roundRect(-13, -13, 26, 26, 4).fill(0x2c3e50);
       g.roundRect(-13, -13, 26, 26, 4).stroke({ color: 0x1a252f, width: 1.5 });

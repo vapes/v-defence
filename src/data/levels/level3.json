@@ -3,7 +3,7 @@
   "name": "The River",
   "startingMoney": 400,
   "lives": 10,
-  "availableTowers": ["bullet", "laser", "mortar"],
+  "availableTowers": ["bullet", "laser", "magic"],
   "grid": [
     [2, 1, 1, 1, 0, 0, 0],
     [0, 0, 0, 1, 0, 0, 0],

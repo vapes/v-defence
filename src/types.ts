@@ -8,7 +8,7 @@ export enum CellType {
 export type TowerType =
   | 'bullet'
   | 'laser'
-  | 'mortar'
+  | 'magic'
   | 'cryo'
   | 'alchemist'
   | 'gold_mine'
@@ -17,7 +17,7 @@ export type TowerType =
   | 'oracle'
   | 'orbital';
 
-export type EnemyType = 'circle' | 'circle2' | 'triangle' | 'hexagon' | 'square' | 'pentagon';
+export type EnemyType = 'circle' | 'circle2' | 'triangle' | 'hexagon' | 'square' | 'pentagon' | 'titan';
 
 export interface Point {
   x: number;

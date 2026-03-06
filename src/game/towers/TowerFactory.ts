@@ -20,7 +20,7 @@ export class TowerFactory {
         return new LaserTower(row, col);
       case 'tesla':
         return new TeslaTower(row, col);
-      case 'mortar':
+      case 'magic':
         return new MortarTower(row, col);
       case 'cryo':
         return new CryoTower(row, col);

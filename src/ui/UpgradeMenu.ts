@@ -19,7 +19,7 @@ const TOWER_NAMES: Record<TowerType, string> = {
   bullet: 'Arbalest',
   laser: 'Prism',
   tesla: 'Tesla',
-  mortar: 'Mortar',
+  magic: 'Magic Ball',
   cryo: 'Cryo',
   alchemist: 'Alchemist',
   gold_mine: 'Gold Mine',
@@ -79,7 +79,7 @@ function buildStats(tower: Tower, next: TowerLevelStats | null): StatEntry[] {
       num('Targets', s.chainTargets, next?.chainTargets);
       num('Range', s.range, next?.range);
       break;
-    case 'mortar':
+    case 'magic':
       num('DMG', s.damage, next?.damage);
       num('Rate', s.fireRate, next?.fireRate, 'ms');
       num('AoE', s.aoeRadius, next?.aoeRadius);

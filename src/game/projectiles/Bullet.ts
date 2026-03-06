@@ -6,7 +6,7 @@ export class Bullet extends Projectile {
 
   constructor(damage: number, target: Enemy, startX: number, startY: number) {
     super(damage, target, startX, startY);
-    this.gfx.circle(0, 0, 4).fill(0xffd700);
+    this.gfx.circle(0, 0, 4).fill(0x000000);
   }
 
   update(dt: number): void {

@@ -29,10 +29,10 @@ const TOWER_INFO: Record<TowerType, TowerInfo> = {
     desc: 'Continuous beam. Damage ramps up while focused on one target.',
     color: 0xe74c3c,
   },
-  mortar: {
-    name: 'Mortar',
-    desc: 'Explosive shells deal area damage. Lvl 3 stuns.',
-    color: 0x6b4226,
+  magic: {
+    name: 'Magic Ball',
+    desc: 'Charges a fireball and launches it into the crowd. AoE fire damage. Lvl 3 stuns.',
+    color: 0xff6600,
   },
   cryo: {
     name: 'Cryo',
@@ -102,7 +102,7 @@ function getLevelStats(type: TowerType): StatRow[] {
       num('DMG', 'damage'); num('Rate', 'fireRate', 'ms'); num('Range', 'range'); break;
     case 'laser':
       num('Base DPS', 'baseDamage'); num('Max DPS', 'maxDamage'); num('Range', 'range'); break;
-    case 'mortar':
+    case 'magic':
       num('DMG', 'damage'); num('AoE', 'aoeRadius'); num('Rate', 'fireRate', 'ms'); break;
     case 'cryo':
       pct('Slow', 'slowFactor'); num('DPS', 'damage'); num('Range', 'range'); break;
@@ -136,6 +136,24 @@ interface DemoProjectile {
   speed: number;
 }
 
+// ── Seen towers persistence ──────────────────────────────────────────────────
+
+const SEEN_TOWERS_KEY = 'v-defence-seen-towers';
+
+function getSeenTowers(): Set<TowerType> {
+  try {
+    const data = localStorage.getItem(SEEN_TOWERS_KEY);
+    if (data) return new Set(JSON.parse(data) as TowerType[]);
+  } catch {}
+  return new Set();
+}
+
+function markTowerSeen(type: TowerType): void {
+  const seen = getSeenTowers();
+  seen.add(type);
+  localStorage.setItem(SEEN_TOWERS_KEY, JSON.stringify([...seen]));
+}
+
 // ── Public API ──────────────────────────────────────────────────────────────
 
 export function getNewTowersForLevel(levelId: number): TowerType[] {
@@ -146,7 +164,8 @@ export function getNewTowersForLevel(levelId: number): TowerType[] {
   }
   const currentLevel = LEVELS.find((l) => l.id === levelId);
   if (!currentLevel) return [];
-  return currentLevel.availableTowers.filter((t) => !previousTowers.has(t));
+  const seen = getSeenTowers();
+  return currentLevel.availableTowers.filter((t) => !previousTowers.has(t) && !seen.has(t));
 }
 
 export class NewTowerPopup extends Container {
@@ -417,6 +436,7 @@ export class NewTowerPopup extends Container {
   // ── Lifecycle ─────────────────────────────────────────────────────────────
 
   private advance(): void {
+    markTowerSeen(this.queue[0]);
     this.queue.shift();
     if (this.queue.length > 0) this.showCurrent();
     else this.close();

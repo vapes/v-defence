@@ -122,9 +122,7 @@ export class GameScene extends Container implements Scene {
           bonus += Math.round(enemy.reward * kb);
         }
       }
-      this.coins += enemy.reward + bonus;
-      this.hud.coins = this.coins;
-      this.towerBar.setTowers(this.level.availableTowers, this.coins);
+      this.changeCoins(enemy.reward + bonus);
       const hudPos = this.hud.coinTextPosition;
       this.coinAnim.spawn(enemy.x, enemy.y, hudPos.x, hudPos.y);
     };
@@ -304,9 +302,7 @@ export class GameScene extends Container implements Scene {
     const cost = TOWER_CONFIGS[type].levels[0].cost;
     if (this.coins < cost) return;
 
-    this.coins -= cost;
-    this.hud.coins = this.coins;
-    this.towerBar.setTowers(this.level.availableTowers, this.coins);
+    this.changeCoins(-cost);
 
     const tower = TowerFactory.create(type, this.selectedCell.row, this.selectedCell.col);
     const pos = this.grid.getCellWorldPos(this.selectedCell.row, this.selectedCell.col);
@@ -315,7 +311,7 @@ export class GameScene extends Container implements Scene {
     tower.totalInvested = cost;
 
     const selfManaged: TowerType[] = [
-      'laser', 'tesla', 'mortar', 'cryo', 'alchemist',
+      'laser', 'tesla', 'magic', 'cryo', 'alchemist',
       'gold_mine', 'void_beacon', 'oracle', 'orbital',
     ];
     if (!selfManaged.includes(type)) {
@@ -330,9 +326,7 @@ export class GameScene extends Container implements Scene {
 
     if (tower instanceof GoldMineTower) {
       tower.onGoldGenerated = (amount) => {
-        this.coins += amount;
-        this.hud.coins = this.coins;
-        this.towerBar.setTowers(this.level.availableTowers, this.coins);
+        this.changeCoins(amount);
       };
     }
 
@@ -347,22 +341,27 @@ export class GameScene extends Container implements Scene {
     const cost = tower.upgradeCost;
     if (this.coins < cost) return;
 
-    this.coins -= cost;
-    this.hud.coins = this.coins;
-    this.towerBar.setTowers(this.level.availableTowers, this.coins);
+    this.changeCoins(-cost);
     tower.upgrade();
   }
 
   private sellTower(tower: Tower): void {
     const refund = tower.sellValue;
-    this.coins += refund;
-    this.hud.coins = this.coins;
-    this.towerBar.setTowers(this.level.availableTowers, this.coins);
+    this.changeCoins(refund);
 
     const cell = this.grid.cells[tower.gridRow]?.[tower.gridCol];
     if (cell) cell.tower = null;
 
     this.towerManager.remove(tower);
+  }
+
+  private changeCoins(delta: number): void {
+    this.coins += delta;
+    this.hud.coins = this.coins;
+    this.towerBar.setTowers(this.level.availableTowers, this.coins);
+    if (this.upgradeMenu.visible && this.selectedCell?.tower) {
+      this.upgradeMenu.open(this.selectedCell.tower, this.coins);
+    }
   }
 
   update(dt: number): void {

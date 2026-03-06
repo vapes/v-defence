@@ -65,7 +65,7 @@ export class LevelSelectScene extends Container implements Scene {
     LEVELS.forEach((level, idx) => {
       const col = idx % COLS;
       const row = Math.floor(idx / COLS);
-      const locked = idx + 1 > unlockedLevel;
+      const locked = level.id > unlockedLevel;
       const btnColor = locked ? COLORS.buttonDisabled : COLORS.buttonNormal;
 
       const btn = new Button(`${level.id}`, BTN_W, BTN_H, btnColor);
@@ -101,6 +101,10 @@ export class LevelSelectScene extends Container implements Scene {
 
       this.addChild(btn);
     });
+
+    if (import.meta.env.DEV) {
+      this.addDevClearButton(w, h);
+    }
   }
 
   private getUnlockedLevel(): number {
@@ -111,5 +115,16 @@ export class LevelSelectScene extends Container implements Scene {
       }
     } catch {}
     return 1;
+  }
+
+  private addDevClearButton(w: number, h: number): void {
+    const btn = new Button('DEV: Clear Storage', 160, 28, 0x880000);
+    btn.x = w - 160 - 8;
+    btn.y = h - 28 - 8;
+    btn.on('pointertap', () => {
+      localStorage.clear();
+      this.onEnter();
+    });
+    this.addChild(btn);
   }
 }

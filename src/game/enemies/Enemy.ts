@@ -23,6 +23,8 @@ export abstract class Enemy extends Container {
   isDead: boolean = false;
   reachedBase: boolean = false;
 
+  armor: number = 0;
+
   slowFactor: number = 0;
   slowTimer: number = 0;
   stunTimer: number = 0;
@@ -155,7 +157,11 @@ export abstract class Enemy extends Container {
     this.armorShred = maxShred;
   }
 
-  takeDamage(amount: number): void {
+  takeDamage(amount: number, ignoresArmor = false): void {
+    if (!ignoresArmor && this.armor > 0) {
+      const effectiveArmor = Math.max(0, this.armor / 100 - this.armorShred);
+      amount *= (1 - effectiveArmor);
+    }
     this.health -= amount;
     this.healthBar.updateHealth(this.health / this.maxHealth);
     if (this.health <= 0) {

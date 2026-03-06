@@ -198,10 +198,11 @@ function drawTowerIcon(type: TowerType): Graphics {
       g.poly([0, -16, 7, -1, -7, -1]).fill(0xe74c3c);
       g.poly([0, -16, 7, -1, -7, -1]).stroke({ color: 0x333333, width: 1 });
       break;
-    case 'mortar':
-      g.circle(0, 0, 13).fill(0x6b4226);
-      g.circle(0, 0, 13).stroke({ color: 0x3c1f0a, width: 1.5 });
-      g.circle(0, 0, 6).fill(0x3c1f0a);
+    case 'magic':
+      g.circle(0, 0, 13).fill(0x1a0a3e);
+      g.circle(0, 0, 13).stroke({ color: 0x7b1fa2, width: 1.5 });
+      g.circle(0, 0, 7).fill(0xff4400);
+      g.circle(0, 0, 3.5).fill(0xffdd00);
       break;
     case 'cryo':
       g.circle(0, 0, 13).fill(0x4fc3f7);

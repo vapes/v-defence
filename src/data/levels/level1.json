@@ -2,7 +2,7 @@
   "id": 1,
   "name": "First Steps",
   "startingMoney": 100,
-  "lives": 10,
+  "lives": 3,
   "availableTowers": ["bullet"],
   "grid": [
     [0, 0, 2, 0, 0, 0, 0],
@@ -16,11 +16,7 @@
     [0, 0, 3, 0, 0, 0, 0]
   ],
   "waves": [
-    {
-      "groups": [
-        { "type": "circle", "count": 2, "spawnInterval": 1500, "delayBefore": 0 }
-      ]
-    },
+    
     {
       "groups": [
         { "type": "circle", "count": 4, "spawnInterval": 1200, "delayBefore": 0 }
@@ -28,22 +24,69 @@
     },
     {
       "groups": [
-        { "type": "circle", "count": 8, "spawnInterval": 1000, "delayBefore": 0 }
+        { "type": "circle", "count": 8, "spawnInterval": 1000, "delayBefore": 0 },
+        { "type": "circle2", "count": 2, "spawnInterval": 1000, "delayBefore": 1000 }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 16, "spawnInterval": 800, "delayBefore": 0 }
+        { "type": "circle", "count": 16, "spawnInterval": 800, "delayBefore": 0 },
+        { "type": "circle2", "count": 4, "spawnInterval": 1000, "delayBefore": 1000 }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 32, "spawnInterval": 600, "delayBefore": 0 }
+        {
+          "type": "circle",
+          "count": 32,
+          "spawnInterval": 600,
+          "delayBefore": 0
+        },
+        {
+          "type": "circle2",
+          "count": 8,
+          "spawnInterval": 1000,
+          "delayBefore": 1000
+        },
+         {
+           "type": "triangle",
+           "count": 2,
+           "spawnInterval": 100,
+           "delayBefore": 2000
+         }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 64, "spawnInterval": 400, "delayBefore": 0 }
+        {
+          "type": "circle",
+          "count": 64,
+          "spawnInterval": 400,
+          "delayBefore": 0
+        },
+        
+        {
+          "type": "circle2",
+          "count": 16,
+          "spawnInterval": 1000,
+          "delayBefore": 1000
+        },
+        {
+          "type": "triangle",
+          "count": 4,
+          "spawnInterval": 100,
+          "delayBefore": 2000
+        }
+      ]
+    },
+    {
+      "groups": [
+        {
+          "type": "hexagon",
+          "count": 10,
+          "spawnInterval": 800,
+          "delayBefore": 0
+        }
       ]
     }
   ],

@@ -3,7 +3,7 @@
   "name": "Maze Runner",
   "startingMoney": 500,
   "lives": 10,
-  "availableTowers": ["bullet", "laser", "mortar", "cryo", "alchemist"],
+  "availableTowers": ["bullet", "laser", "magic", "cryo", "alchemist"],
   "grid": [
     [0, 0, 2, 0, 0, 0, 0],
     [0, 0, 1, 1, 1, 0, 0],

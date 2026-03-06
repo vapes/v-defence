@@ -3,7 +3,7 @@
   "name": "Deep Dive",
   "startingMoney": 650,
   "lives": 10,
-  "availableTowers": ["bullet", "laser", "mortar", "cryo", "alchemist", "gold_mine", "tesla", "void_beacon", "oracle"],
+  "availableTowers": ["bullet", "laser", "magic", "cryo", "alchemist", "gold_mine", "tesla", "void_beacon", "oracle"],
   "grid": [
     [0, 0, 0, 0, 2, 0, 0],
     [0, 0, 0, 0, 1, 0, 0],

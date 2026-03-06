@@ -3,7 +3,7 @@
   "name": "Long Trail",
   "startingMoney": 450,
   "lives": 10,
-  "availableTowers": ["bullet", "laser", "mortar"],
+  "availableTowers": ["bullet", "laser", "magic"],
   "grid": [
     [0, 0, 0, 0, 0, 2, 0],
     [0, 0, 0, 0, 0, 1, 0],

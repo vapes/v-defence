@@ -3,7 +3,7 @@
   "name": "DEV Sandbox",
   "startingMoney": 5000,
   "lives": 99,
-  "availableTowers": ["bullet", "laser", "tesla", "mortar", "cryo", "alchemist", "gold_mine", "void_beacon", "oracle", "orbital"],
+  "availableTowers": ["bullet", "laser", "tesla", "magic", "cryo", "alchemist", "gold_mine", "void_beacon", "oracle", "orbital"],
   "grid": [
     [2, 1, 1, 1, 1, 1, 0],
     [0, 0, 0, 0, 0, 1, 0],

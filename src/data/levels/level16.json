@@ -3,7 +3,7 @@
   "name": "The Spiral",
   "startingMoney": 700,
   "lives": 10,
-  "availableTowers": ["bullet", "laser", "mortar", "cryo", "alchemist", "gold_mine", "tesla", "void_beacon", "oracle", "orbital"],
+  "availableTowers": ["bullet", "laser", "magic", "cryo", "alchemist", "gold_mine", "tesla", "void_beacon", "oracle", "orbital"],
   "grid": [
     [2, 1, 1, 1, 1, 1, 0],
     [0, 0, 0, 0, 0, 1, 0],

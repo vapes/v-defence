@@ -3,7 +3,7 @@
   "name": "Long Road",
   "startingMoney": 500,
   "lives": 10,
-  "availableTowers": ["bullet", "laser", "mortar", "cryo", "alchemist", "gold_mine"],
+  "availableTowers": ["bullet", "laser", "magic", "cryo", "alchemist", "gold_mine"],
   "grid": [
     [0, 0, 0, 2, 0, 0, 0],
     [0, 0, 0, 1, 1, 0, 0],
