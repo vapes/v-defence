@@ -40,6 +40,11 @@
       "groups": [
         { "type": "circle", "count": 32, "spawnInterval": 600, "delayBefore": 0 }
       ]
+    },
+    {
+      "groups": [
+        { "type": "circle", "count": 64, "spawnInterval": 400, "delayBefore": 0 }
+      ]
     }
   ],
   "solution": "place bullet at 3,3 - upgrade bullet at 3,3 - place bullet at 5,2 - place bullet at 1,3 - place bullet at 3,2"
