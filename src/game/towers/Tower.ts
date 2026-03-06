@@ -79,7 +79,7 @@ export abstract class Tower extends Container {
     if (this.level === 0) return;
     const color = this.level === 1 ? 0x5dade2 : 0xffd700;
     const alpha = this.level === 1 ? 0.5 : 0.7;
-    const round: TowerType[] = ['bullet', 'tesla', 'alchemist', 'gold_mine', 'oracle'];
+    const round: TowerType[] = ['bullet', 'tesla'];
     if (round.includes(this.towerType)) {
       this.levelGfx.circle(0, 0, 26).stroke({ color, alpha, width: 2 });
     } else {

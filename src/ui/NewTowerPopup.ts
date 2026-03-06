@@ -39,39 +39,14 @@ const TOWER_INFO: Record<TowerType, TowerInfo> = {
     desc: 'Freezing aura slows all enemies in range.',
     color: 0x4fc3f7,
   },
-  alchemist: {
-    name: 'Alchemist',
-    desc: 'Poison deals damage over time. Lvl 3 shreds armor.',
-    color: 0x8e44ad,
-  },
-  gold_mine: {
-    name: 'Gold Mine',
-    desc: "Generates gold every 10s. Doesn't attack.",
-    color: 0xf39c12,
-  },
   tesla: {
     name: 'Tesla',
     desc: 'Chain lightning jumps between enemies. Full damage each jump.',
     color: 0x3498db,
   },
-  void_beacon: {
-    name: 'Void Beacon',
-    desc: 'Teleports enemies back 20%. Lvl 3 stuns bosses.',
-    color: 0x8b00ff,
-  },
-  oracle: {
-    name: 'Oracle',
-    desc: 'Buffs nearby towers: +range and +attack speed.',
-    color: 0x1abc9c,
-  },
-  orbital: {
-    name: 'Orbital Beam',
-    desc: 'Hits strongest enemy on map. Huge damage, long cooldown.',
-    color: 0xe74c3c,
-  },
 };
 
-const NO_DEMO: TowerType[] = ['gold_mine', 'oracle'];
+const NO_DEMO: TowerType[] = [];
 
 interface StatRow {
   label: string;
@@ -106,18 +81,8 @@ function getLevelStats(type: TowerType): StatRow[] {
       num('DMG', 'damage'); num('AoE', 'aoeRadius'); num('Rate', 'fireRate', 'ms'); break;
     case 'cryo':
       pct('Slow', 'slowFactor'); num('DPS', 'damage'); num('Range', 'range'); break;
-    case 'alchemist':
-      num('DoT', 'dotDamage', '/s'); num('Dur', 'dotDuration', 's'); num('Range', 'range'); break;
-    case 'gold_mine':
-      num('Income', 'income'); num('Every', 'interval', 's'); break;
     case 'tesla':
       num('DMG', 'damage'); num('Targets', 'chainTargets'); num('Range', 'range'); break;
-    case 'void_beacon':
-      pct('Chance', 'teleportChance'); num('CD', 'cooldown', 's'); num('Range', 'range'); break;
-    case 'oracle':
-      pct('Range+', 'rangeBonus'); pct('Speed+', 'speedBonus'); num('Aura', 'auraRadius'); break;
-    case 'orbital':
-      num('DMG', 'damage'); num('CD', 'cooldown', 's'); break;
   }
 
   const costs = levels.map((l) => `$${l.cost}`);

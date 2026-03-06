@@ -24,8 +24,9 @@ export class LaserTower extends Tower {
 
     const shade = this.level === 0 ? 0xe74c3c : this.level === 1 ? 0xff6b6b : 0xff9999;
     this.head.clear();
-    this.head.poly([0, -22, 8, -4, -8, -4]).fill(shade);
-    this.head.poly([0, -22, 8, -4, -8, -4]).stroke({ color: 0x333333, width: 1 });
+    // Triangle centered at (0,0), larger
+    this.head.poly([0, -18, 13, 9, -13, 9]).fill(shade);
+    this.head.poly([0, -18, 13, 9, -13, 9]).stroke({ color: 0x333333, width: 1 });
   }
 
   update(dt: number, enemies: Enemy[]): void {

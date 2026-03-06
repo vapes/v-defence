@@ -21,11 +21,6 @@ const TOWER_NAMES: Record<TowerType, string> = {
   tesla: 'Tesla',
   magic: 'Magic Ball',
   cryo: 'Cryo',
-  alchemist: 'Alchemist',
-  gold_mine: 'Gold Mine',
-  void_beacon: 'Void Beacon',
-  oracle: 'Oracle',
-  orbital: 'Orbital',
 };
 
 function buildStats(tower: Tower, next: TowerLevelStats | null): StatEntry[] {
@@ -94,49 +89,6 @@ function buildStats(tower: Tower, next: TowerLevelStats | null): StatEntry[] {
       pct('Slow', s.slowFactor, next?.slowFactor);
       num('DPS', s.damage, next?.damage);
       num('Range', s.range, next?.range);
-      break;
-    case 'alchemist':
-      num('DoT', s.dotDamage, next?.dotDamage, '/s');
-      num('Dur', s.dotDuration, next?.dotDuration, 's');
-      num('Range', s.range, next?.range);
-      if (next?.armorShred && !s.armorShred) {
-        entries.push({ label: 'Shred', current: '—', delta: `+${Math.round(next.armorShred * 100)}%` });
-      } else if (s.armorShred) {
-        entries.push({ label: 'Shred', current: `${Math.round(s.armorShred * 100)}%`, delta: '' });
-      }
-      break;
-    case 'gold_mine':
-      num('Income', s.income, next?.income);
-      num('Interval', s.interval, next?.interval, 's');
-      if (next?.killBonus && !s.killBonus) {
-        entries.push({ label: 'Kill Bonus', current: '—', delta: `+${Math.round((next.killBonus ?? 0) * 100)}%` });
-      } else if (s.killBonus) {
-        entries.push({ label: 'Kill Bonus', current: `${Math.round(s.killBonus * 100)}%`, delta: '' });
-      }
-      break;
-    case 'void_beacon':
-      pct('TP Chance', s.teleportChance, next?.teleportChance);
-      num('Cooldown', s.cooldown, next?.cooldown, 's');
-      num('Range', s.range, next?.range);
-      if (next?.bossStun && !s.bossStun) {
-        entries.push({ label: 'Boss Stun', current: '—', delta: `+${next.bossStun}s` });
-      } else if (s.bossStun) {
-        entries.push({ label: 'Boss Stun', current: `${s.bossStun}s`, delta: '' });
-      }
-      break;
-    case 'oracle':
-      pct('Range Buff', s.rangeBonus, next?.rangeBonus);
-      pct('Speed Buff', s.speedBonus ?? 0, next?.speedBonus);
-      num('Aura', s.auraRadius, next?.auraRadius);
-      break;
-    case 'orbital':
-      num('DMG', s.damage, next?.damage);
-      num('Cooldown', s.cooldown, next?.cooldown, 's');
-      if (next?.ignoreArmor && !s.ignoreArmor) {
-        entries.push({ label: 'Ignore Armor', current: '—', delta: '+Yes' });
-      } else if (s.ignoreArmor) {
-        entries.push({ label: 'Ignore Armor', current: 'Yes', delta: '' });
-      }
       break;
     default:
       num('DMG', s.damage, next?.damage);

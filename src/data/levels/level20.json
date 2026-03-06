@@ -3,67 +3,264 @@
   "name": "The Endgame",
   "startingMoney": 800,
   "lives": 10,
-  "availableTowers": ["bullet", "laser", "magic", "cryo", "alchemist", "gold_mine", "tesla", "void_beacon", "oracle", "orbital"],
+  "availableTowers": [
+    "bullet",
+    "laser",
+    "magic",
+    "cryo",
+    "tesla"
+  ],
   "grid": [
-    [0, 0, 0, 0, 0, 2, 0],
-    [0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 1, 1, 1, 1, 0],
-    [0, 1, 0, 0, 0, 0, 0],
-    [0, 1, 1, 1, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 1, 1, 1, 1, 0],
-    [0, 1, 0, 0, 0, 0, 0],
-    [0, 1, 1, 1, 0, 0, 0],
-    [0, 0, 0, 3, 0, 0, 0]
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0
+    ]
   ],
   "waves": [
     {
       "groups": [
-        { "type": "circle", "count": 18, "spawnInterval": 600, "delayBefore": 0 },
-        { "type": "triangle", "count": 10, "spawnInterval": 800, "delayBefore": 5000 }
+        {
+          "type": "circle",
+          "count": 18,
+          "spawnInterval": 600,
+          "delayBefore": 0
+        },
+        {
+          "type": "triangle",
+          "count": 10,
+          "spawnInterval": 800,
+          "delayBefore": 5000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "triangle", "count": 16, "spawnInterval": 600, "delayBefore": 0 },
-        { "type": "hexagon", "count": 6, "spawnInterval": 2000, "delayBefore": 3000 }
+        {
+          "type": "triangle",
+          "count": 16,
+          "spawnInterval": 600,
+          "delayBefore": 0
+        },
+        {
+          "type": "hexagon",
+          "count": 6,
+          "spawnInterval": 2000,
+          "delayBefore": 3000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 22, "spawnInterval": 500, "delayBefore": 0 },
-        { "type": "square", "count": 8, "spawnInterval": 1200, "delayBefore": 4000 }
+        {
+          "type": "circle",
+          "count": 22,
+          "spawnInterval": 500,
+          "delayBefore": 0
+        },
+        {
+          "type": "square",
+          "count": 8,
+          "spawnInterval": 1200,
+          "delayBefore": 4000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 8, "spawnInterval": 1800, "delayBefore": 0 },
-        { "type": "square", "count": 10, "spawnInterval": 1000, "delayBefore": 3000 },
-        { "type": "triangle", "count": 16, "spawnInterval": 600, "delayBefore": 6000 }
+        {
+          "type": "hexagon",
+          "count": 8,
+          "spawnInterval": 1800,
+          "delayBefore": 0
+        },
+        {
+          "type": "square",
+          "count": 10,
+          "spawnInterval": 1000,
+          "delayBefore": 3000
+        },
+        {
+          "type": "triangle",
+          "count": 16,
+          "spawnInterval": 600,
+          "delayBefore": 6000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 10, "spawnInterval": 1500, "delayBefore": 0 },
-        { "type": "square", "count": 12, "spawnInterval": 800, "delayBefore": 5000 },
-        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 16000 }
+        {
+          "type": "hexagon",
+          "count": 10,
+          "spawnInterval": 1500,
+          "delayBefore": 0
+        },
+        {
+          "type": "square",
+          "count": 12,
+          "spawnInterval": 800,
+          "delayBefore": 5000
+        },
+        {
+          "type": "pentagon",
+          "count": 1,
+          "spawnInterval": 0,
+          "delayBefore": 16000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 12, "spawnInterval": 1200, "delayBefore": 0 },
-        { "type": "square", "count": 14, "spawnInterval": 700, "delayBefore": 5000 },
-        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 16000 }
+        {
+          "type": "hexagon",
+          "count": 12,
+          "spawnInterval": 1200,
+          "delayBefore": 0
+        },
+        {
+          "type": "square",
+          "count": 14,
+          "spawnInterval": 700,
+          "delayBefore": 5000
+        },
+        {
+          "type": "pentagon",
+          "count": 1,
+          "spawnInterval": 0,
+          "delayBefore": 16000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 14, "spawnInterval": 1000, "delayBefore": 0 },
-        { "type": "square", "count": 16, "spawnInterval": 600, "delayBefore": 6000 },
-        { "type": "circle", "count": 25, "spawnInterval": 400, "delayBefore": 8000 },
-        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 18000 }
+        {
+          "type": "hexagon",
+          "count": 14,
+          "spawnInterval": 1000,
+          "delayBefore": 0
+        },
+        {
+          "type": "square",
+          "count": 16,
+          "spawnInterval": 600,
+          "delayBefore": 6000
+        },
+        {
+          "type": "circle",
+          "count": 25,
+          "spawnInterval": 400,
+          "delayBefore": 8000
+        },
+        {
+          "type": "pentagon",
+          "count": 1,
+          "spawnInterval": 0,
+          "delayBefore": 18000
+        }
       ]
     }
   ],

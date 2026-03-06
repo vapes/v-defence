@@ -178,8 +178,6 @@ export class TowerBar extends Container {
 }
 
 function formatName(type: TowerType): string {
-  if (type === 'gold_mine') return 'Gold Mine';
-  if (type === 'void_beacon') return 'Void';
   return type.charAt(0).toUpperCase() + type.slice(1);
 }
 
@@ -210,35 +208,10 @@ function drawTowerIcon(type: TowerType): Graphics {
       g.rect(-2, -12, 4, 24).fill(0xffffff);
       g.rect(-12, -2, 24, 4).fill(0xffffff);
       break;
-    case 'alchemist':
-      g.circle(0, 0, 13).fill(0x8e44ad);
-      g.circle(0, 0, 13).stroke({ color: 0x6c3483, width: 1.5 });
-      g.circle(0, 0, 5).fill(0xd7bde2);
-      break;
-    case 'gold_mine':
-      g.circle(0, 0, 13).fill(0xf39c12);
-      g.circle(0, 0, 13).stroke({ color: 0xd68910, width: 1.5 });
-      g.circle(0, 0, 6).fill(0xffd700);
-      break;
     case 'tesla':
       g.circle(0, 0, 13).fill(0x1a1a2e);
       g.circle(0, 0, 13).stroke({ color: 0x9b59b6, width: 2 });
       g.poly([-3, -12, 3, -2, -2, -2, 2, 12, -3, 0, 3, 0]).fill(0xffd700);
-      break;
-    case 'void_beacon':
-      g.circle(0, 0, 13).fill(0x0d0d1a);
-      g.circle(0, 0, 13).stroke({ color: 0x8b00ff, width: 2 });
-      g.circle(0, 0, 5).fill(0x8b00ff);
-      break;
-    case 'oracle':
-      g.circle(0, 0, 13).fill(0x1abc9c);
-      g.circle(0, 0, 13).stroke({ color: 0x16a085, width: 1.5 });
-      g.circle(0, 0, 4).fill(0xffffff);
-      break;
-    case 'orbital':
-      g.circle(0, 0, 13).fill(0x2c3e50);
-      g.circle(0, 0, 13).stroke({ color: 0xe74c3c, width: 2 });
-      g.circle(0, 0, 4).fill(0xe74c3c);
       break;
     default:
       g.circle(0, 0, 13).fill(0x555555);

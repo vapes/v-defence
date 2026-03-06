@@ -9,7 +9,6 @@ import { ProjectileManager } from '../game/ProjectileManager';
 import { WaveManager } from '../game/WaveManager';
 import { TowerFactory } from '../game/towers/TowerFactory';
 import { Tower } from '../game/towers/Tower';
-import { GoldMineTower } from '../game/towers/GoldMineTower';
 import { Bullet } from '../game/projectiles/Bullet';
 import { LaserBeam } from '../game/projectiles/LaserBeam';
 import { HUD } from '../ui/HUD';
@@ -111,18 +110,7 @@ export class GameScene extends Container implements Scene {
     this.grid.onCellClick = (cell) => this.onCellClick(cell);
 
     this.enemyManager.onEnemyKilled = (enemy) => {
-      let bonus = 0;
-      for (const t of this.towerManager.towers) {
-        if (t.towerType !== 'gold_mine') continue;
-        const kb = t.stats.killBonus ?? 0;
-        if (kb <= 0) continue;
-        const dx = enemy.x - t.x;
-        const dy = enemy.y - t.y;
-        if (Math.sqrt(dx * dx + dy * dy) <= (t.stats.range ?? 0)) {
-          bonus += Math.round(enemy.reward * kb);
-        }
-      }
-      this.changeCoins(enemy.reward + bonus);
+      this.changeCoins(enemy.reward);
       const hudPos = this.hud.coinTextPosition;
       this.coinAnim.spawn(enemy.x, enemy.y, hudPos.x, hudPos.y);
     };
@@ -310,10 +298,7 @@ export class GameScene extends Container implements Scene {
     tower.y = pos.y;
     tower.totalInvested = cost;
 
-    const selfManaged: TowerType[] = [
-      'laser', 'tesla', 'magic', 'cryo', 'alchemist',
-      'gold_mine', 'void_beacon', 'oracle', 'orbital',
-    ];
+    const selfManaged: TowerType[] = ['laser', 'tesla', 'magic', 'cryo'];
     if (!selfManaged.includes(type)) {
       tower.onFire = (t, target) => {
         if (t.towerType === 'bullet') {
@@ -321,12 +306,6 @@ export class GameScene extends Container implements Scene {
         } else {
           this.projectileManager.add(new LaserBeam(t.stats.damage ?? 0, target, t.x, t.y));
         }
-      };
-    }
-
-    if (tower instanceof GoldMineTower) {
-      tower.onGoldGenerated = (amount) => {
-        this.changeCoins(amount);
       };
     }
 

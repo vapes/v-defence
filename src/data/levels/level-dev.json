@@ -3,49 +3,190 @@
   "name": "DEV Sandbox",
   "startingMoney": 5000,
   "lives": 99,
-  "availableTowers": ["bullet", "laser", "tesla", "magic", "cryo", "alchemist", "gold_mine", "void_beacon", "oracle", "orbital"],
+  "availableTowers": [
+    "bullet",
+    "laser",
+    "tesla",
+    "magic",
+    "cryo"
+  ],
   "grid": [
-    [2, 1, 1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 1, 1, 1, 1, 0],
-    [0, 1, 0, 0, 0, 0, 0],
-    [0, 1, 1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 1, 1, 1, 1, 0],
-    [0, 1, 0, 0, 0, 0, 0],
-    [0, 1, 1, 1, 1, 0, 0],
-    [0, 0, 0, 0, 3, 0, 0]
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0
+    ]
   ],
   "waves": [
     {
       "groups": [
-        { "type": "circle", "count": 15, "spawnInterval": 600, "delayBefore": 0 }
+        {
+          "type": "circle",
+          "count": 15,
+          "spawnInterval": 600,
+          "delayBefore": 0
+        }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 10, "spawnInterval": 500, "delayBefore": 0 },
-        { "type": "triangle", "count": 8, "spawnInterval": 400, "delayBefore": 3000 }
+        {
+          "type": "circle",
+          "count": 10,
+          "spawnInterval": 500,
+          "delayBefore": 0
+        },
+        {
+          "type": "triangle",
+          "count": 8,
+          "spawnInterval": 400,
+          "delayBefore": 3000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 5, "spawnInterval": 1500, "delayBefore": 0 },
-        { "type": "circle", "count": 20, "spawnInterval": 300, "delayBefore": 2000 }
+        {
+          "type": "hexagon",
+          "count": 5,
+          "spawnInterval": 1500,
+          "delayBefore": 0
+        },
+        {
+          "type": "circle",
+          "count": 20,
+          "spawnInterval": 300,
+          "delayBefore": 2000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "square", "count": 8, "spawnInterval": 800, "delayBefore": 0 },
-        { "type": "triangle", "count": 15, "spawnInterval": 300, "delayBefore": 2000 },
-        { "type": "hexagon", "count": 3, "spawnInterval": 2000, "delayBefore": 5000 }
+        {
+          "type": "square",
+          "count": 8,
+          "spawnInterval": 800,
+          "delayBefore": 0
+        },
+        {
+          "type": "triangle",
+          "count": 15,
+          "spawnInterval": 300,
+          "delayBefore": 2000
+        },
+        {
+          "type": "hexagon",
+          "count": 3,
+          "spawnInterval": 2000,
+          "delayBefore": 5000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 30, "spawnInterval": 200, "delayBefore": 0 },
-        { "type": "square", "count": 10, "spawnInterval": 600, "delayBefore": 3000 },
-        { "type": "pentagon", "count": 2, "spawnInterval": 5000, "delayBefore": 8000 }
+        {
+          "type": "circle",
+          "count": 30,
+          "spawnInterval": 200,
+          "delayBefore": 0
+        },
+        {
+          "type": "square",
+          "count": 10,
+          "spawnInterval": 600,
+          "delayBefore": 3000
+        },
+        {
+          "type": "pentagon",
+          "count": 2,
+          "spawnInterval": 5000,
+          "delayBefore": 8000
+        }
       ]
     }
   ],

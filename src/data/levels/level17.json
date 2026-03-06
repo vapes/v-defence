@@ -3,59 +3,236 @@
   "name": "Double Cross",
   "startingMoney": 725,
   "lives": 10,
-  "availableTowers": ["bullet", "laser", "magic", "cryo", "alchemist", "gold_mine", "tesla", "void_beacon", "oracle", "orbital"],
+  "availableTowers": [
+    "bullet",
+    "laser",
+    "magic",
+    "cryo",
+    "tesla"
+  ],
   "grid": [
-    [0, 0, 2, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 1, 1, 1, 1, 0],
-    [0, 1, 0, 0, 0, 0, 0],
-    [0, 1, 1, 1, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 1, 1, 1, 1, 0],
-    [0, 3, 0, 0, 0, 0, 0]
+    [
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
   ],
   "waves": [
     {
       "groups": [
-        { "type": "circle", "count": 16, "spawnInterval": 700, "delayBefore": 0 },
-        { "type": "triangle", "count": 8, "spawnInterval": 900, "delayBefore": 5000 }
+        {
+          "type": "circle",
+          "count": 16,
+          "spawnInterval": 700,
+          "delayBefore": 0
+        },
+        {
+          "type": "triangle",
+          "count": 8,
+          "spawnInterval": 900,
+          "delayBefore": 5000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "triangle", "count": 14, "spawnInterval": 600, "delayBefore": 0 },
-        { "type": "hexagon", "count": 5, "spawnInterval": 2000, "delayBefore": 3000 }
+        {
+          "type": "triangle",
+          "count": 14,
+          "spawnInterval": 600,
+          "delayBefore": 0
+        },
+        {
+          "type": "hexagon",
+          "count": 5,
+          "spawnInterval": 2000,
+          "delayBefore": 3000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 18, "spawnInterval": 500, "delayBefore": 0 },
-        { "type": "square", "count": 7, "spawnInterval": 1500, "delayBefore": 4000 }
+        {
+          "type": "circle",
+          "count": 18,
+          "spawnInterval": 500,
+          "delayBefore": 0
+        },
+        {
+          "type": "square",
+          "count": 7,
+          "spawnInterval": 1500,
+          "delayBefore": 4000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 7, "spawnInterval": 1800, "delayBefore": 0 },
-        { "type": "square", "count": 8, "spawnInterval": 1200, "delayBefore": 3000 },
-        { "type": "triangle", "count": 12, "spawnInterval": 700, "delayBefore": 6000 }
+        {
+          "type": "hexagon",
+          "count": 7,
+          "spawnInterval": 1800,
+          "delayBefore": 0
+        },
+        {
+          "type": "square",
+          "count": 8,
+          "spawnInterval": 1200,
+          "delayBefore": 3000
+        },
+        {
+          "type": "triangle",
+          "count": 12,
+          "spawnInterval": 700,
+          "delayBefore": 6000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 9, "spawnInterval": 1500, "delayBefore": 0 },
-        { "type": "square", "count": 9, "spawnInterval": 1000, "delayBefore": 4000 },
-        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 15000 }
+        {
+          "type": "hexagon",
+          "count": 9,
+          "spawnInterval": 1500,
+          "delayBefore": 0
+        },
+        {
+          "type": "square",
+          "count": 9,
+          "spawnInterval": 1000,
+          "delayBefore": 4000
+        },
+        {
+          "type": "pentagon",
+          "count": 1,
+          "spawnInterval": 0,
+          "delayBefore": 15000
+        }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 10, "spawnInterval": 1200, "delayBefore": 0 },
-        { "type": "square", "count": 12, "spawnInterval": 800, "delayBefore": 5000 },
-        { "type": "circle", "count": 20, "spawnInterval": 500, "delayBefore": 8000 }
+        {
+          "type": "hexagon",
+          "count": 10,
+          "spawnInterval": 1200,
+          "delayBefore": 0
+        },
+        {
+          "type": "square",
+          "count": 12,
+          "spawnInterval": 800,
+          "delayBefore": 5000
+        },
+        {
+          "type": "circle",
+          "count": 20,
+          "spawnInterval": 500,
+          "delayBefore": 8000
+        }
       ]
     }
   ],

@@ -10,12 +10,7 @@ export type TowerType =
   | 'laser'
   | 'magic'
   | 'cryo'
-  | 'alchemist'
-  | 'gold_mine'
-  | 'tesla'
-  | 'void_beacon'
-  | 'oracle'
-  | 'orbital';
+  | 'tesla';
 
 export type EnemyType = 'circle' | 'circle2' | 'triangle' | 'hexagon' | 'square' | 'pentagon' | 'titan';
 
@@ -66,29 +61,10 @@ export interface TowerLevelStats {
   stunDuration?: number;
   // Cryo (slow)
   slowFactor?: number;
-  // Alchemist (DoT)
-  dotDamage?: number;
-  dotDuration?: number;
-  armorShred?: number;
-  // Gold Mine (economy)
-  income?: number;
-  interval?: number;
-  killBonus?: number;
   // Tesla (chain lightning)
   chainTargets?: number;
   strikeChance?: number;
   strikeDamage?: number;
-  // Void Beacon (teleport)
-  teleportChance?: number;
-  cooldown?: number;
-  bossStun?: number;
-  // Oracle (aura buff)
-  rangeBonus?: number;
-  speedBonus?: number;
-  auraRadius?: number;
-  revealStealth?: boolean;
-  // Orbital (global sniper)
-  ignoreArmor?: boolean;
 }
 
 export interface TowerConfig {

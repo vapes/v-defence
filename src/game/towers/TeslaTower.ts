@@ -19,12 +19,16 @@ export class TeslaTower extends Tower {
 
   private cooldown: number = 0;
   private boltGfx: Graphics;
+  private arcsGfx: Graphics;
   private bolts: LightningBolt[] = [];
 
   constructor(row: number, col: number) {
     super(row, col);
     this.boltGfx = new Graphics();
     this.addChildAt(this.boltGfx, 0);
+    // arcsGfx above head (index 4), below levelGfx
+    this.arcsGfx = new Graphics();
+    this.addChildAt(this.arcsGfx, 4);
     this.drawTower();
   }
 
@@ -45,11 +49,10 @@ export class TeslaTower extends Tower {
     this.cooldown -= dtMs;
 
     this.updateBolts(dt);
+    this.drawArcs();
 
     const target = this.findTarget(enemies);
     if (!target) return;
-
-    this.rotateToTarget(target);
 
     if (this.cooldown <= 0) {
       this.cooldown = this.stats.fireRate ?? 1000;
@@ -111,6 +114,26 @@ export class TeslaTower extends Tower {
       }
     }
     return best;
+  }
+
+  private drawArcs(): void {
+    this.arcsGfx.clear();
+    // Small electric arcs radiating from the head sphere (center 0, -12, radius 7)
+    const cx = 0, cy = -12, r = 7;
+    for (let i = 0; i < 6; i++) {
+      if (Math.random() < 0.45) continue;
+      const angle = (Math.PI * 2 * i) / 6 + (Math.random() - 0.5) * 0.6;
+      const len = 6 + Math.random() * 8;
+      const sx = cx + Math.cos(angle) * r;
+      const sy = cy + Math.sin(angle) * r;
+      const ex = cx + Math.cos(angle) * (r + len);
+      const ey = cy + Math.sin(angle) * (r + len);
+      const mx = (sx + ex) / 2 + (Math.random() - 0.5) * 5;
+      const my = (sy + ey) / 2 + (Math.random() - 0.5) * 5;
+      const alpha = 0.5 + Math.random() * 0.5;
+      this.arcsGfx.moveTo(sx, sy).lineTo(mx, my).lineTo(ex, ey)
+        .stroke({ color: 0x00bfff, alpha, width: 1 + Math.random() });
+    }
   }
 
   private updateBolts(dt: number): void {
