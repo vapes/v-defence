@@ -1,5 +1,5 @@
 import { EnemyType } from '../../types';
-import { ENEMY_CONFIGS } from '../../data/enemy-configs';
+import { enemies as ENEMY_CONFIGS } from '../../data/game-configs.json';
 import { Enemy } from './Enemy';
 import { CircleEnemy } from './CircleEnemy';
 import { TriangleEnemy } from './TriangleEnemy';

@@ -1,7 +1,7 @@
 import { Container } from 'pixi.js';
 import { Scene, SceneManager } from '../core/SceneManager';
 import { LevelConfig, TowerType, WaveState } from '../types';
-import { towers as TOWER_CONFIGS } from '../data/tower-configs.json';
+import { towers as TOWER_CONFIGS } from '../data/game-configs.json';
 import { Grid } from '../game/Grid';
 import { EnemyManager } from '../game/EnemyManager';
 import { TowerManager } from '../game/TowerManager';

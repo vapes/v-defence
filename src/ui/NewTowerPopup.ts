@@ -4,7 +4,7 @@ import { TowerFactory } from '../game/towers/TowerFactory';
 import { Tower } from '../game/towers/Tower';
 import { EnemyFactory } from '../game/enemies/EnemyFactory';
 import { Enemy } from '../game/enemies/Enemy';
-import { towers as TOWER_CONFIGS } from '../data/tower-configs.json';
+import { towers as TOWER_CONFIGS } from '../data/game-configs.json';
 import { LEVELS } from '../data/levels';
 
 const CARD_W = 340;

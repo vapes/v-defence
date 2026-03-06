@@ -1,7 +1,7 @@
 import { Container, Graphics, Text } from 'pixi.js';
 import { COLORS, TOWER_BAR_HEIGHT } from '../constants';
 import { TowerType } from '../types';
-import { towers as TOWER_CONFIGS } from '../data/tower-configs.json';
+import { towers as TOWER_CONFIGS } from '../data/game-configs.json';
 
 const SLOT_W = 76;
 const SLOT_H = 80;

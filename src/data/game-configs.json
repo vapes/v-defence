@@ -1,4 +1,46 @@
 {
+  "enemies": {
+    "circle": {
+      "type": "circle",
+      "health": 20,
+      "speed": 1.2,
+      "reward": 10,
+      "color": 15158332,
+      "armor": 0
+    },
+    "triangle": {
+      "type": "triangle",
+      "health": 20,
+      "speed": 1.6,
+      "reward": 12,
+      "color": 15997970,
+      "armor": 0
+    },
+    "hexagon": {
+      "type": "hexagon",
+      "health": 300,
+      "speed": 0.64,
+      "reward": 40,
+      "color": 10176950,
+      "armor": 5
+    },
+    "square": {
+      "type": "square",
+      "health": 150,
+      "speed": 0.96,
+      "reward": 25,
+      "color": 3447003,
+      "armor": 25
+    },
+    "pentagon": {
+      "type": "pentagon",
+      "health": 2500,
+      "speed": 0.48,
+      "reward": 200,
+      "color": 3066993,
+      "armor": 30
+    }
+  },
   "towers": {
     "bullet": {
       "type": "projectile",
