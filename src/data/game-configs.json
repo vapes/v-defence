@@ -8,6 +8,14 @@
       "color": 15158332,
       "armor": 0
     },
+    "circle2": {
+      "type": "circle2",
+      "health": 40,
+      "speed": 1.2,
+      "reward": 10,
+      "color": 10181046,
+      "armor": 0
+    },
     "triangle": {
       "type": "triangle",
       "health": 20,
