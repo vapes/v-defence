@@ -4,7 +4,7 @@
       "type": "circle",
       "health": 20,
       "speed": 1.2,
-      "reward": 10,
+      "reward": 5,
       "color": 15158332,
       "armor": 0
     },

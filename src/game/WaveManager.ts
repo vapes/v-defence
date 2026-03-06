@@ -54,7 +54,7 @@ export class WaveManager {
     }
 
     const wave = this.waves[this.currentWave];
-    this.waveMultiplier = 1 + this.currentWave * 0.15;
+    this.waveMultiplier = 1;
     this.spawnTasks = wave.groups.map((g) => ({
       type: g.type,
       count: g.count,
