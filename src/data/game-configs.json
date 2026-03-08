@@ -26,9 +26,9 @@
     },
     "mtriangle": {
       "type": "mtriangle",
-      "health": 8,
-      "speed": 2.0,
-      "reward": 2,
+      "health": 21,
+      "speed": 2.2,
+      "reward": 6,
       "color": 16753920,
       "armor": 0
     },

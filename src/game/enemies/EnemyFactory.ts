@@ -22,8 +22,10 @@ export class EnemyFactory {
         enemy = new Circle2Enemy(health, cfg.speed, cfg.reward, cfg.color); break;
       case 'triangle':
         enemy = new TriangleEnemy(health, cfg.speed, cfg.reward, cfg.color); break;
-      case 'mtriangle':
-        enemy = new MTriangleEnemy(health, cfg.speed, cfg.reward, cfg.color); break;
+      case 'mtriangle': {
+        const speed = cfg.speed + (Math.random() * 0.4 - 0.2);
+        enemy = new MTriangleEnemy(health, speed, cfg.reward, cfg.color); break;
+      }
       case 'hexagon':
         enemy = new HexagonEnemy(health, cfg.speed, cfg.reward, cfg.color); break;
       case 'square':
