@@ -61,12 +61,20 @@ export class LaserTower extends Tower {
     const dx = target.x - this.x;
     const dy = target.y - this.y;
 
+    // interpolate blue -> red based on intensity
+    const r = Math.round(intensity * 0xff);
+    const b = Math.round((1 - intensity) * 0xff);
+    const color = (r << 16) | b;
+    const gr = Math.round(0x44 + intensity * 0xbb);
+    const gb = Math.round(0x44 + (1 - intensity) * 0xbb);
+    const glowColor = (gr << 16) | (0x44 << 8) | gb;
+
     const alpha = 0.4 + 0.6 * intensity;
     const width = 2 + 3 * intensity;
-    this.beamGfx.moveTo(0, 0).lineTo(dx, dy).stroke({ color: 0xff0000, alpha, width });
+    this.beamGfx.moveTo(0, 0).lineTo(dx, dy).stroke({ color, alpha, width });
 
     const glowAlpha = 0.1 + 0.15 * intensity;
-    this.beamGfx.moveTo(0, 0).lineTo(dx, dy).stroke({ color: 0xff4444, alpha: glowAlpha, width: width + 4 });
+    this.beamGfx.moveTo(0, 0).lineTo(dx, dy).stroke({ color: glowColor, alpha: glowAlpha, width: width + 4 });
   }
 
   private clearBeam(): void {

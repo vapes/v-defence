@@ -9,47 +9,47 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const LEVELS_DIR = join(__dirname, '../src/data/levels');
+const GAME_CONFIGS = JSON.parse(readFileSync(join(__dirname, '../src/data/game-configs.json'), 'utf8'));
 const CELL_SIZE = 64;
 const SIM_DT = 30;
 
 // ── Configs ──────────────────────────────────────────────────────────────────
 
+function mapTowerLevel(type, l) {
+  switch(type) {
+    case 'laser':  return {cost:l.cost, baseDmg:l.baseDamage, maxDmg:l.maxDamage, range:l.range};
+    case 'magic':  return {cost:l.cost, damage:l.damage, fireRate:l.fireRate, range:l.range, aoe:l.aoeRadius};
+    case 'cryo':   return {cost:l.cost, damage:l.damage, fireRate:500, range:l.range, slow:l.slowFactor};
+    case 'tesla':  return {cost:l.cost, damage:l.damage, fireRate:l.fireRate, chain:l.chainTargets, range:l.range,
+                           ...(l.strikeChance ? {strikeChance:l.strikeChance, strikeDamage:l.strikeDamage} : {})};
+    default:       return {cost:l.cost, damage:l.damage, fireRate:l.fireRate, range:l.range};
+  }
+}
+
 const TOWER = {
-  bullet:    { levels:[{cost:100,damage:20,fireRate:900,range:120},
-                        {cost:180,damage:45,fireRate:750,range:150},
-                        {cost:300,damage:100,fireRate:600,range:180}] },
-  laser:     { levels:[{cost:150,baseDmg:10,maxDmg:25, range:100},
-                        {cost:250,baseDmg:20,maxDmg:65, range:120},
-                        {cost:450,baseDmg:40,maxDmg:180,range:140}] },
-  mortar:    { levels:[{cost:120,damage:30,fireRate:2500,range:200,aoe:40},
-                        {cost:200,damage:60,fireRate:2000,range:220,aoe:60},
-                        {cost:450,damage:150,fireRate:2000,range:250,aoe:100}] },
-  cryo:      { levels:[{cost:80, damage:2, fireRate:500, range:100,slow:0.2},
-                        {cost:120,damage:5, fireRate:500, range:110,slow:0.4},
-                        {cost:300,damage:10,fireRate:500, range:130,slow:0.6}] },
-  alchemist: { levels:[{cost:150,dotDps:5, dotDur:3,range:110,fireRate:1000},
-                        {cost:250,dotDps:15,dotDur:5,range:130,fireRate:1000},
-                        {cost:500,dotDps:40,dotDur:7,range:150,fireRate:1000,shred:0.5}] },
-  gold_mine: { levels:[{cost:200,income:20,interval:10000},
-                        {cost:300,income:60,interval:10000},
-                        {cost:600,income:150,interval:10000}] },
-  tesla:     { levels:[{cost:180,damage:15,chain:3,range:100,fireRate:1000},
-                        {cost:250,damage:30,chain:5,range:120,fireRate:1000},
-                        {cost:500,damage:60,chain:8,range:140,fireRate:1000}] },
-  void_beacon:{levels:[{cost:250,range:150},{cost:350,range:170},{cost:600,range:200}]},
-  oracle:    { levels:[{cost:150,aura:150},{cost:200,aura:180},{cost:450,aura:200}]},
-  orbital:   { levels:[{cost:400,damage:200,cooldown:8000,range:99999},
-                        {cost:500,damage:500,cooldown:6000,range:99999},
-                        {cost:1000,damage:1500,cooldown:5000,range:99999,ignoreArmor:true}]},
+  // Loaded from game-configs.json
+  ...Object.fromEntries(
+    Object.entries(GAME_CONFIGS.towers)
+      .filter(([k]) => k !== '_commonParamDescriptions')
+      .map(([k, t]) => [k, {levels: t.levels.map(l => mapTowerLevel(k, l))}])
+  ),
+  // Not in game-configs.json — hardcoded
+  alchemist:  { levels:[{cost:150,dotDps:5, dotDur:3,range:110,fireRate:1000},
+                         {cost:250,dotDps:15,dotDur:5,range:130,fireRate:1000},
+                         {cost:500,dotDps:40,dotDur:7,range:150,fireRate:1000,shred:0.5}] },
+  gold_mine:  { levels:[{cost:200,income:20, interval:10000},
+                         {cost:300,income:60, interval:10000},
+                         {cost:600,income:150,interval:10000}] },
+  void_beacon:{ levels:[{cost:250,range:150},{cost:350,range:170},{cost:600,range:200}] },
+  oracle:     { levels:[{cost:150,aura:150},{cost:200,aura:180},{cost:450,aura:200}] },
+  orbital:    { levels:[{cost:400, damage:200, cooldown:8000, range:99999},
+                         {cost:500, damage:500, cooldown:6000, range:99999},
+                         {cost:1000,damage:1500,cooldown:5000, range:99999,ignoreArmor:true}] },
 };
 
-const ENEMY = {
-  circle:   {hp:60,  speed:1.5,reward:10, armor:0 },
-  triangle: {hp:40,  speed:2.0,reward:12, armor:0 },
-  hexagon:  {hp:300, speed:0.8,reward:40, armor:5 },
-  square:   {hp:150, speed:1.2,reward:25, armor:25},
-  pentagon: {hp:2500,speed:0.6,reward:200,armor:30},
-};
+const ENEMY = Object.fromEntries(
+  Object.entries(GAME_CONFIGS.enemies).map(([k, e]) => [k, {hp:e.health, speed:e.speed, reward:e.reward, armor:e.armor}])
+);
 
 const PASSIVE = new Set(['oracle','void_beacon','gold_mine']);
 const W = (r,c) => ({x:c*CELL_SIZE+CELL_SIZE/2, y:r*CELL_SIZE+CELL_SIZE/2});
@@ -112,7 +112,7 @@ function posOnPath(progress,pw){
 function towerEffDps(type, level, armor){
   const s=TOWER[type].levels[level];
   if(type==='laser')     return Math.max(0,(s.baseDmg+s.maxDmg)/2-armor);
-  if(type==='mortar')    return Math.max(0,s.damage-armor)*2; // AoE
+  if(type==='magic')    return Math.max(0,s.damage-armor)*2; // AoE
   if(type==='tesla')     return Math.max(0,s.damage-armor)*Math.min(s.chain,4)/((s.fireRate||1000)/1000);
   if(type==='alchemist') return Math.max(0,s.dotDps-armor);
   if(type==='cryo')      return 0.5;
@@ -191,7 +191,7 @@ function greedySpend(money, towers, occupied, validPos, available, path,
 function simulateWave(waveCfg, wi, towers, occupied, validPos, available, path,
                       pathWorld, totalLen, actions, startMoney,
                       armorP, armorU, upgradeOnly) {
-  const hpMult=1+wi*0.15;
+  const hpMult=1;
   const SPPMS=60/1000; // speed-px-per-ms factor
 
   const schedule=[];
@@ -282,7 +282,7 @@ function simulateWave(waveCfg, wi, towers, occupied, validPos, available, path,
         pri.hp-=Math.max(0,dps-pri.armor)*SIM_DT/1000;
         if(pri.hp<=0&&pri.alive){pri.alive=false;money+=pri.reward;}
         tw.cd=SIM_DT;
-      } else if(tw.type==='mortar'){
+      } else if(tw.type==='magic'){
         const ep=posOnPath(pri.progress,pathWorld);
         for(const e of live){
           if(D(ep,posOnPath(e.progress,pathWorld))<=st.aoe){
@@ -342,7 +342,7 @@ function analyzeLevel(level){
 
 // ── Solve ─────────────────────────────────────────────────────────────────────
 
-function tryStrategy(level, path, pathSet, validPos, pathWorld, totalLen, cfg){
+function tryStrategy(level, path, validPos, pathWorld, totalLen, cfg){
   const {budgetFrac, armorForPlacement, upgradeOnlyAfterWave} = cfg;
   const available=level.availableTowers;
   const {maxArmor,firstArmorWave,avgArmor}=analyzeLevel(level);
@@ -409,7 +409,7 @@ function solve(level){
   ];
 
   for(const cfg of strategies){
-    const r=tryStrategy(level,path,pathSet,validPos,pathWorld,totalLen,cfg);
+    const r=tryStrategy(level,path,validPos,pathWorld,totalLen,cfg);
     if(r) return r;
   }
   return null;

@@ -62,5 +62,5 @@
       ]
     }
   ],
-  "solution": "place bullet at center path - upgrade to L2 after wave 2 - upgrade to L3 after wave 3 - add 2nd bullet after wave 4"
+  "solution": "place bullet at 3,3 - place bullet at 5,2 - place bullet at 1,3 - place bullet at 3,2 - place bullet at 5,3 - place bullet at 7,1 - place bullet at 1,1 - place bullet at 3,1 - place bullet at 3,5 - place bullet at 5,0 - place bullet at 7,3 - place bullet at 0,1 - place bullet at 0,3 - place bullet at 1,4 - place bullet at 2,1 - place bullet at 2,5"
 }
