@@ -24,6 +24,14 @@
       "color": 15997970,
       "armor": 0
     },
+    "mtriangle": {
+      "type": "mtriangle",
+      "health": 8,
+      "speed": 2.0,
+      "reward": 2,
+      "color": 16753920,
+      "armor": 0
+    },
     "hexagon": {
       "type": "hexagon",
       "health": 300,

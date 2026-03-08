@@ -8,6 +8,7 @@ import { HexagonEnemy } from './HexagonEnemy';
 import { SquareEnemy } from './SquareEnemy';
 import { PentagonEnemy } from './PentagonEnemy';
 import { TitanEnemy } from './TitanEnemy';
+import { MTriangleEnemy } from './MTriangleEnemy';
 
 export class EnemyFactory {
   static create(type: EnemyType, waveMultiplier: number = 1): Enemy {
@@ -21,6 +22,8 @@ export class EnemyFactory {
         enemy = new Circle2Enemy(health, cfg.speed, cfg.reward, cfg.color); break;
       case 'triangle':
         enemy = new TriangleEnemy(health, cfg.speed, cfg.reward, cfg.color); break;
+      case 'mtriangle':
+        enemy = new MTriangleEnemy(health, cfg.speed, cfg.reward, cfg.color); break;
       case 'hexagon':
         enemy = new HexagonEnemy(health, cfg.speed, cfg.reward, cfg.color); break;
       case 'square':

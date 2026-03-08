@@ -19,46 +19,53 @@
   "waves": [
     {
       "groups": [
-        { "type": "circle", "count": 15, "spawnInterval": 1000, "delayBefore": 0 }
-      ]
+        { "type": "circle", "count": 12, "spawnInterval": 1100, "delayBefore": 0 }
+      ],
+      "gold": 60
     },
     {
       "groups": [
-        { "type": "circle", "count": 22, "spawnInterval": 750, "delayBefore": 0 }
-      ]
+        { "type": "circle", "count": 16, "spawnInterval": 900, "delayBefore": 0 }
+      ],
+      "gold": 80
     },
     {
       "groups": [
-        { "type": "circle2", "count": 12, "spawnInterval": 700, "delayBefore": 0 },
-        { "type": "triangle", "count": 10, "spawnInterval": 600, "delayBefore": 5000 }
-      ]
+        { "type": "circle2", "count": 5, "spawnInterval": 1050, "delayBefore": 0 },
+        { "type": "triangle", "count": 4, "spawnInterval": 950, "delayBefore": 5000 }
+      ],
+      "gold": 98
     },
     {
       "groups": [
-        { "type": "circle", "count": 25, "spawnInterval": 350, "delayBefore": 0 },
-        { "type": "triangle", "count": 15, "spawnInterval": 400, "delayBefore": 5000 },
-        { "type": "square", "count": 6, "spawnInterval": 1250, "delayBefore": 11500 }
-      ]
+        { "type": "circle", "count": 10, "spawnInterval": 600, "delayBefore": 0 },
+        { "type": "triangle", "count": 7, "spawnInterval": 650, "delayBefore": 5000 },
+        { "type": "square", "count": 2, "spawnInterval": 1800, "delayBefore": 11500 }
+      ],
+      "gold": 184
     },
     {
       "groups": [
         { "type": "circle2", "count": 18, "spawnInterval": 400, "delayBefore": 0 },
         { "type": "triangle", "count": 18, "spawnInterval": 350, "delayBefore": 4000 },
         { "type": "hexagon", "count": 4, "spawnInterval": 1750, "delayBefore": 11000 }
-      ]
+      ],
+      "gold": 556
     },
     {
       "groups": [
         { "type": "titan", "count": 1, "spawnInterval": 0, "delayBefore": 0 },
         { "type": "circle2", "count": 25, "spawnInterval": 300, "delayBefore": 21000 }
-      ]
+      ],
+      "gold": 570
     },
     {
       "groups": [
         { "type": "titan", "count": 1, "spawnInterval": 0, "delayBefore": 0 },
         { "type": "titan", "count": 1, "spawnInterval": 0, "delayBefore": 6000 },
         { "type": "circle2", "count": 30, "spawnInterval": 250, "delayBefore": 27500 }
-      ]
+      ],
+      "gold": 940
     }
   ],
   "solution": "place bullet - upgrade to L2/L3 - buy tesla for groups - buy cryo to slow titans - buy laser for high-HP enemies"

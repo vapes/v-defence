@@ -12,7 +12,7 @@ export type TowerType =
   | 'cryo'
   | 'tesla';
 
-export type EnemyType = 'circle' | 'circle2' | 'triangle' | 'hexagon' | 'square' | 'pentagon' | 'titan';
+export type EnemyType = 'circle' | 'circle2' | 'triangle' | 'mtriangle' | 'hexagon' | 'square' | 'pentagon' | 'titan';
 
 export interface Point {
   x: number;

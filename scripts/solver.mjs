@@ -448,7 +448,8 @@ function formatLevelJson(level) {
         wave.groups.forEach((group, gi) => {
           lines.push(`${I}${I}${I}${I}${compactObject(group)}${gi < wave.groups.length - 1 ? ',' : ''}`);
         });
-        lines.push(`${I}${I}${I}]`);
+        lines.push(`${I}${I}${I}]${wave.gold !== undefined ? ',' : ''}`);
+        if (wave.gold !== undefined) lines.push(`${I}${I}${I}"gold": ${wave.gold}`);
         lines.push(`${I}${I}}${wi < value.length - 1 ? ',' : ''}`);
       });
       lines.push(`${I}]${comma}`);

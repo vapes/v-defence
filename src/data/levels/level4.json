@@ -18,51 +18,58 @@
   "waves": [
     {
       "groups": [
-        { "type": "circle", "count": 18, "spawnInterval": 900, "delayBefore": 0 },
-        { "type": "circle2", "count": 6, "spawnInterval": 1100, "delayBefore": 6000 }
-      ]
+        { "type": "circle", "count": 7, "spawnInterval": 1300, "delayBefore": 0 },
+        { "type": "circle2", "count": 2, "spawnInterval": 1600, "delayBefore": 6000 }
+      ],
+      "gold": 55
     },
     {
       "groups": [
-        { "type": "circle", "count": 20, "spawnInterval": 750, "delayBefore": 0 },
-        { "type": "circle2", "count": 10, "spawnInterval": 850, "delayBefore": 6000 },
-        { "type": "triangle", "count": 8, "spawnInterval": 850, "delayBefore": 13000 }
-      ]
+        { "type": "circle", "count": 8, "spawnInterval": 1200, "delayBefore": 0 },
+        { "type": "circle2", "count": 3, "spawnInterval": 1300, "delayBefore": 6000 },
+        { "type": "triangle", "count": 3, "spawnInterval": 1300, "delayBefore": 13000 }
+      ],
+      "gold": 106
     },
     {
       "groups": [
-        { "type": "circle2", "count": 12, "spawnInterval": 700, "delayBefore": 0 },
-        { "type": "square", "count": 3, "spawnInterval": 2500, "delayBefore": 5000 },
-        { "type": "triangle", "count": 10, "spawnInterval": 750, "delayBefore": 12000 }
-      ]
+        { "type": "circle2", "count": 3, "spawnInterval": 2000, "delayBefore": 0 },
+        { "type": "square", "count": 1, "spawnInterval": 5000, "delayBefore": 8000 },
+        { "type": "triangle", "count": 3, "spawnInterval": 2000, "delayBefore": 18000 }
+      ],
+      "gold": 91
     },
     {
       "groups": [
         { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 0 },
-        { "type": "square", "count": 3, "spawnInterval": 2500, "delayBefore": 7500 },
-        { "type": "hexagon", "count": 1, "spawnInterval": 0, "delayBefore": 15000 }
-      ]
+        { "type": "square", "count": 1, "spawnInterval": 5000, "delayBefore": 8000 },
+        { "type": "hexagon", "count": 1, "spawnInterval": 0, "delayBefore": 18000 }
+      ],
+      "gold": 265
     },
     {
       "groups": [
         { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 0 },
         { "type": "hexagon", "count": 2, "spawnInterval": 4000, "delayBefore": 7500 },
         { "type": "square", "count": 4, "spawnInterval": 2000, "delayBefore": 15000 }
-      ]
+      ],
+      "gold": 380
     },
     {
       "groups": [
         { "type": "pentagon", "count": 2, "spawnInterval": 10000, "delayBefore": 0 },
         { "type": "hexagon", "count": 2, "spawnInterval": 3500, "delayBefore": 11000 },
         { "type": "square", "count": 4, "spawnInterval": 2000, "delayBefore": 18000 }
-      ]
+      ],
+      "gold": 580
     },
     {
       "groups": [
         { "type": "pentagon", "count": 2, "spawnInterval": 9000, "delayBefore": 0 },
         { "type": "hexagon", "count": 3, "spawnInterval": 3000, "delayBefore": 10000 },
         { "type": "square", "count": 4, "spawnInterval": 2000, "delayBefore": 17000 }
-      ]
+      ],
+      "gold": 620
     }
   ],
   "solution": "place bullet - upgrade to L2/L3 - buy laser - upgrade laser - buy cryo - buy magic"
