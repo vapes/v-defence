@@ -96,8 +96,8 @@ interface DemoProjectile {
   gfx: Graphics;
   x: number;
   y: number;
-  tx: number;
-  ty: number;
+  target: Enemy;
+  damage: number;
   speed: number;
 }
 
@@ -317,18 +317,18 @@ export class NewTowerPopup extends Container {
 
     if (type === 'bullet') {
       tower.onFire = (t, target) => {
-        this.spawnDemoProjectile(t.x, t.y, target.x, target.y);
+        this.spawnDemoProjectile(t.x, t.y, target, t.stats.damage ?? 20);
       };
     }
 
     // Spawn initial enemies
-    for (let i = 0; i < 3; i++) {
-      this.spawnDemoEnemy(content, i * 0.35);
+    for (let i = 0; i < 5; i++) {
+      this.spawnDemoEnemy(content, i * 0.2);
     }
   }
 
   private spawnDemoEnemy(parent: Container, progressOffset: number): void {
-    const enemy = EnemyFactory.create('circle', 0.3);
+    const enemy = EnemyFactory.create('circle', 1);
     enemy.setPath(this.demoPath);
     enemy.waypointIndex = Math.floor(progressOffset * (this.demoPath.length - 1));
     enemy.progress = (progressOffset * (this.demoPath.length - 1)) % 1;
@@ -336,14 +336,14 @@ export class NewTowerPopup extends Container {
     this.demoEnemies.push(enemy);
   }
 
-  private spawnDemoProjectile(fx: number, fy: number, tx: number, ty: number): void {
+  private spawnDemoProjectile(fx: number, fy: number, target: Enemy, damage: number): void {
     if (!this.demoContainer) return;
     const gfx = new Graphics();
     gfx.circle(0, 0, 3).fill(0xffdd44);
     const content = this.demoContainer.children[2] as Container;
     if (content) content.addChild(gfx);
     gfx.x = fx; gfx.y = fy;
-    this.demoProjectiles.push({ gfx, x: fx, y: fy, tx, ty, speed: 6 });
+    this.demoProjectiles.push({ gfx, x: fx, y: fy, target, damage, speed: 6 });
   }
 
   private cleanupDemo(): void {
@@ -450,10 +450,16 @@ export class NewTowerPopup extends Container {
     // Update demo projectiles (for bullet tower)
     for (let i = this.demoProjectiles.length - 1; i >= 0; i--) {
       const p = this.demoProjectiles[i];
-      const ddx = p.tx - p.x;
-      const ddy = p.ty - p.y;
+      if (p.target.isDead || p.target.reachedBase) {
+        p.gfx.destroy();
+        this.demoProjectiles.splice(i, 1);
+        continue;
+      }
+      const ddx = p.target.x - p.x;
+      const ddy = p.target.y - p.y;
       const dist = Math.sqrt(ddx * ddx + ddy * ddy);
       if (dist < p.speed) {
+        p.target.takeDamage(p.damage);
         p.gfx.destroy();
         this.demoProjectiles.splice(i, 1);
         continue;

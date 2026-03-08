@@ -1,9 +1,9 @@
 {
   "id": 2,
   "name": "The Bend",
-  "startingMoney": 150,
-  "lives": 3,
-  "availableTowers": ["bullet", "laser"],
+  "startingMoney": 100,
+  "lives": 20,
+  "availableTowers": ["bullet", "magic"],
   "grid": [
     [0, 0, 0, 0, 2, 0, 0],
     [0, 0, 0, 0, 1, 0, 0],
@@ -19,173 +19,53 @@
   "waves": [
     {
       "groups": [
-        {
-          "type": "triangle",
-          "count": 4,
-          "spawnInterval": 1200,
-          "delayBefore": 0
-        }
+        { "type": "circle", "count": 12, "spawnInterval": 1000, "delayBefore": 0 },
+        { "type": "triangle", "count": 4, "spawnInterval": 1250, "delayBefore": 4000 }
       ]
     },
     {
       "groups": [
-        {
-          "type": "triangle",
-          "count": 5,
-          "spawnInterval": 1000,
-          "delayBefore": 0
-        },
-        {
-          "type": "hexagon",
-          "count": 1,
-          "spawnInterval": 1000,
-          "delayBefore": 1000
-        }
+        { "type": "circle", "count": 15, "spawnInterval": 900, "delayBefore": 0 },
+        { "type": "circle2", "count": 5, "spawnInterval": 1000, "delayBefore": 5000 },
+        { "type": "triangle", "count": 5, "spawnInterval": 1000, "delayBefore": 9000 }
       ]
     },
     {
       "groups": [
-        {
-          "type": "triangle",
-          "count": 10,
-          "spawnInterval": 800,
-          "delayBefore": 0
-        },
-        {
-          "type": "hexagon",
-          "count": 2,
-          "spawnInterval": 2000,
-          "delayBefore": 4000
-        }
+        { "type": "circle", "count": 18, "spawnInterval": 750, "delayBefore": 0 },
+        { "type": "circle2", "count": 7, "spawnInterval": 850, "delayBefore": 5000 },
+        { "type": "triangle", "count": 6, "spawnInterval": 850, "delayBefore": 10000 }
       ]
     },
     {
       "groups": [
-        {
-          "type": "triangle",
-          "count": 18,
-          "spawnInterval": 800,
-          "delayBefore": 0
-        },
-        {
-          "type": "hexagon",
-          "count": 8,
-          "spawnInterval": 2000,
-          "delayBefore": 4000
-        },
-        {
-          "type": "circle2",
-          "count": 1,
-          "spawnInterval": 1000,
-          "delayBefore": 2000
-        }
+        { "type": "circle", "count": 20, "spawnInterval": 600, "delayBefore": 0 },
+        { "type": "circle2", "count": 9, "spawnInterval": 750, "delayBefore": 5000 },
+        { "type": "triangle", "count": 7, "spawnInterval": 700, "delayBefore": 10500 }
       ]
     },
     {
       "groups": [
-        {
-          "type": "circle",
-          "count": 10,
-          "spawnInterval": 700,
-          "delayBefore": 0
-        },
-        {
-          "type": "triangle",
-          "count": 6,
-          "spawnInterval": 800,
-          "delayBefore": 3000
-        },
-        {
-          "type": "hexagon",
-          "count": 2,
-          "spawnInterval": 2500,
-          "delayBefore": 7000
-        },
-        {
-          "type": "circle2",
-          "count": 2,
-          "spawnInterval": 1000,
-          "delayBefore": 1000
-        }
+        { "type": "circle2", "count": 12, "spawnInterval": 650, "delayBefore": 0 },
+        { "type": "circle", "count": 20, "spawnInterval": 550, "delayBefore": 4000 },
+        { "type": "triangle", "count": 9, "spawnInterval": 600, "delayBefore": 13000 }
       ]
     },
     {
       "groups": [
-        {
-          "type": "circle",
-          "count": 12,
-          "spawnInterval": 700,
-          "delayBefore": 0
-        },
-        {
-          "type": "triangle",
-          "count": 8,
-          "spawnInterval": 800,
-          "delayBefore": 3000
-        },
-        {
-          "type": "circle2",
-          "count": 4,
-          "spawnInterval": 900,
-          "delayBefore": 1000
-        }
+        { "type": "triangle", "count": 12, "spawnInterval": 600, "delayBefore": 0 },
+        { "type": "circle2", "count": 14, "spawnInterval": 600, "delayBefore": 4000 },
+        { "type": "circle", "count": 20, "spawnInterval": 450, "delayBefore": 11000 }
       ]
     },
     {
       "groups": [
-        {
-          "type": "circle",
-          "count": 10,
-          "spawnInterval": 700,
-          "delayBefore": 0
-        },
-        {
-          "type": "triangle",
-          "count": 8,
-          "spawnInterval": 800,
-          "delayBefore": 2000
-        },
-        {
-          "type": "hexagon",
-          "count": 3,
-          "spawnInterval": 2000,
-          "delayBefore": 6000
-        },
-        {
-          "type": "circle2",
-          "count": 8,
-          "spawnInterval": 900,
-          "delayBefore": 1000
-        }
-      ]
-    },
-    {
-      "groups": [
-        {
-          "type": "triangle",
-          "count": 10,
-          "spawnInterval": 700,
-          "delayBefore": 0
-        },
-        {
-          "type": "hexagon",
-          "count": 4,
-          "spawnInterval": 2000,
-          "delayBefore": 4000
-        },
-        {
-          "type": "circle2",
-          "count": 16,
-          "spawnInterval": 800,
-          "delayBefore": 1000
-        }
-      ]
-    },
-    {
-      "groups": [
-        { "type": "titan", "count": 1, "spawnInterval": 0, "delayBefore": 0 }
+        { "type": "circle2", "count": 15, "spawnInterval": 500, "delayBefore": 0 },
+        { "type": "triangle", "count": 14, "spawnInterval": 500, "delayBefore": 4000 },
+        { "type": "circle", "count": 20, "spawnInterval": 400, "delayBefore": 11000 },
+        { "type": "hexagon", "count": 2, "spawnInterval": 2500, "delayBefore": 19000 }
       ]
     }
   ],
-  "solution": "place bullet at 4,3 - upgrade bullet at 4,3 - place bullet at 6,4 - place bullet at 2,3 - place bullet at 4,4 - place bullet at 6,3 - place bullet at 8,4 - place bullet at 1,3"
+  "solution": "place bullet - upgrade - buy 2nd bullet - upgrade - buy magic"
 }

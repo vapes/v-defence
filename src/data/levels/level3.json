@@ -1,9 +1,9 @@
 {
   "id": 3,
   "name": "The River",
-  "startingMoney": 400,
-  "lives": 10,
-  "availableTowers": ["bullet", "laser", "magic"],
+  "startingMoney": 100,
+  "lives": 15,
+  "availableTowers": ["bullet", "magic", "cryo"],
   "grid": [
     [2, 1, 1, 1, 0, 0, 0],
     [0, 0, 0, 1, 0, 0, 0],
@@ -19,29 +19,52 @@
   "waves": [
     {
       "groups": [
-        { "type": "circle", "count": 8, "spawnInterval": 1000, "delayBefore": 0 },
-        { "type": "triangle", "count": 3, "spawnInterval": 1200, "delayBefore": 3000 }
+        { "type": "circle", "count": 15, "spawnInterval": 1000, "delayBefore": 0 },
+        { "type": "triangle", "count": 5, "spawnInterval": 1250, "delayBefore": 6000 }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 10, "spawnInterval": 700, "delayBefore": 0 },
-        { "type": "triangle", "count": 5, "spawnInterval": 900, "delayBefore": 2000 }
+        { "type": "circle", "count": 18, "spawnInterval": 850, "delayBefore": 0 },
+        { "type": "circle2", "count": 7, "spawnInterval": 1000, "delayBefore": 5500 },
+        { "type": "triangle", "count": 6, "spawnInterval": 1000, "delayBefore": 11000 }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 2, "spawnInterval": 2500, "delayBefore": 0 },
-        { "type": "circle", "count": 8, "spawnInterval": 700, "delayBefore": 3000 }
+        { "type": "circle2", "count": 8, "spawnInterval": 900, "delayBefore": 0 },
+        { "type": "square", "count": 3, "spawnInterval": 2500, "delayBefore": 4000 },
+        { "type": "triangle", "count": 8, "spawnInterval": 750, "delayBefore": 11000 }
       ]
     },
     {
       "groups": [
-        { "type": "triangle", "count": 8, "spawnInterval": 800, "delayBefore": 0 },
-        { "type": "hexagon", "count": 2, "spawnInterval": 2500, "delayBefore": 4000 },
-        { "type": "square", "count": 2, "spawnInterval": 1500, "delayBefore": 8000 }
+        { "type": "square", "count": 4, "spawnInterval": 2000, "delayBefore": 0 },
+        { "type": "circle2", "count": 10, "spawnInterval": 750, "delayBefore": 6500 },
+        { "type": "hexagon", "count": 1, "spawnInterval": 0, "delayBefore": 12500 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 2, "spawnInterval": 3000, "delayBefore": 0 },
+        { "type": "square", "count": 5, "spawnInterval": 2000, "delayBefore": 4000 },
+        { "type": "triangle", "count": 10, "spawnInterval": 600, "delayBefore": 12500 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "square", "count": 5, "spawnInterval": 1750, "delayBefore": 0 },
+        { "type": "hexagon", "count": 2, "spawnInterval": 2750, "delayBefore": 6000 },
+        { "type": "circle2", "count": 12, "spawnInterval": 600, "delayBefore": 11500 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "hexagon", "count": 3, "spawnInterval": 2500, "delayBefore": 0 },
+        { "type": "square", "count": 6, "spawnInterval": 1750, "delayBefore": 5000 },
+        { "type": "triangle", "count": 15, "spawnInterval": 500, "delayBefore": 14000 }
       ]
     }
   ],
-  "solution": "place mortar at 3,3 - upgrade mortar at 3,3 - place bullet at 3,4 - place bullet at 5,2 - place bullet at 1,2 - place mortar at 5,3 - place bullet at 1,4 - place mortar at 2,2"
+  "solution": "place bullet - upgrade to L2 after wave 1 - buy 2nd bullet - buy cryo early - buy magic - upgrade all"
 }

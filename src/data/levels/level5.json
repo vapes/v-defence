@@ -1,9 +1,9 @@
 {
   "id": 5,
   "name": "The Switchback",
-  "startingMoney": 450,
-  "lives": 10,
-  "availableTowers": ["bullet", "laser", "magic", "cryo"],
+  "startingMoney": 100,
+  "lives": 15,
+  "availableTowers": ["bullet", "magic", "cryo", "laser", "tesla"],
   "grid": [
     [0, 0, 2, 0, 0, 0, 0],
     [0, 0, 1, 1, 1, 0, 0],
@@ -19,29 +19,47 @@
   "waves": [
     {
       "groups": [
-        { "type": "circle", "count": 8, "spawnInterval": 1000, "delayBefore": 0 },
-        { "type": "triangle", "count": 3, "spawnInterval": 1200, "delayBefore": 4000 }
+        { "type": "circle", "count": 15, "spawnInterval": 1000, "delayBefore": 0 }
       ]
     },
     {
       "groups": [
-        { "type": "triangle", "count": 6, "spawnInterval": 900, "delayBefore": 0 },
-        { "type": "hexagon", "count": 2, "spawnInterval": 2500, "delayBefore": 3000 }
+        { "type": "circle", "count": 22, "spawnInterval": 750, "delayBefore": 0 }
       ]
     },
     {
       "groups": [
-        { "type": "circle", "count": 10, "spawnInterval": 700, "delayBefore": 0 },
-        { "type": "square", "count": 2, "spawnInterval": 1800, "delayBefore": 4000 }
+        { "type": "circle2", "count": 12, "spawnInterval": 700, "delayBefore": 0 },
+        { "type": "triangle", "count": 10, "spawnInterval": 600, "delayBefore": 5000 }
       ]
     },
     {
       "groups": [
-        { "type": "hexagon", "count": 2, "spawnInterval": 2500, "delayBefore": 0 },
-        { "type": "square", "count": 2, "spawnInterval": 1500, "delayBefore": 3000 },
-        { "type": "triangle", "count": 6, "spawnInterval": 800, "delayBefore": 7000 }
+        { "type": "circle", "count": 25, "spawnInterval": 350, "delayBefore": 0 },
+        { "type": "triangle", "count": 15, "spawnInterval": 400, "delayBefore": 5000 },
+        { "type": "square", "count": 6, "spawnInterval": 1250, "delayBefore": 11500 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "circle2", "count": 18, "spawnInterval": 400, "delayBefore": 0 },
+        { "type": "triangle", "count": 18, "spawnInterval": 350, "delayBefore": 4000 },
+        { "type": "hexagon", "count": 4, "spawnInterval": 1750, "delayBefore": 11000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "titan", "count": 1, "spawnInterval": 0, "delayBefore": 0 },
+        { "type": "circle2", "count": 25, "spawnInterval": 300, "delayBefore": 21000 }
+      ]
+    },
+    {
+      "groups": [
+        { "type": "titan", "count": 1, "spawnInterval": 0, "delayBefore": 0 },
+        { "type": "titan", "count": 1, "spawnInterval": 0, "delayBefore": 6000 },
+        { "type": "circle2", "count": 30, "spawnInterval": 250, "delayBefore": 27500 }
       ]
     }
   ],
-  "solution": "place mortar at 3,3 - upgrade mortar at 3,3 - place mortar at 4,3 - place cryo at 6,2 - place cryo at 4,4 - place cryo at 2,3 - place cryo at 6,3 - place cryo at 0,3"
+  "solution": "place bullet - upgrade to L2/L3 - buy tesla for groups - buy cryo to slow titans - buy laser for high-HP enemies"
 }
