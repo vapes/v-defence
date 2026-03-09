@@ -1,4 +1,4 @@
-import { Container, Graphics } from 'pixi.js';
+import { Container, Graphics, Text } from 'pixi.js';
 import { Cell } from './Cell';
 import { CellType, LevelConfig, Point, GridPosition } from '../types';
 import { CELL_SIZE, COLORS, HUD_HEIGHT, TOWER_BAR_HEIGHT } from '../constants';
@@ -9,6 +9,7 @@ export class Grid extends Container {
   path: Point[] = [];
   private gridGfx: Graphics;
   private highlightGfx: Graphics;
+  private livesText: Text;
   rows: number = 0;
   cols: number = 0;
   offsetX: number = 0;
@@ -22,6 +23,10 @@ export class Grid extends Container {
     this.addChild(this.gridGfx);
     this.highlightGfx = new Graphics();
     this.addChild(this.highlightGfx);
+
+    this.livesText = new Text({ text: '', style: { fontSize: 14, fill: 0xffffff, fontWeight: 'bold' } });
+    this.livesText.anchor.set(0.5, 0.5);
+    this.addChild(this.livesText);
   }
 
   init(level: LevelConfig, screenWidth: number, screenHeight: number): void {
@@ -45,6 +50,21 @@ export class Grid extends Container {
     this.path = PathFinder.findPath(this.cells, this.offsetX, this.offsetY);
     this.draw();
     this.setupInteraction();
+
+    // Position lives label on the base cell
+    outer: for (let r = 0; r < this.rows; r++) {
+      for (let c = 0; c < this.cols; c++) {
+        if (this.cells[r][c].type === CellType.Base) {
+          this.livesText.x = this.offsetX + c * CELL_SIZE + CELL_SIZE / 2;
+          this.livesText.y = this.offsetY + r * CELL_SIZE + CELL_SIZE / 2;
+          break outer;
+        }
+      }
+    }
+  }
+
+  updateLives(lives: number): void {
+    this.livesText.text = lives.toString();
   }
 
   private draw(): void {

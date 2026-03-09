@@ -48,7 +48,7 @@ export abstract class Enemy extends Container {
 
     this.healthBar = new HealthBar();
     this.addChild(this.healthBar);
-    this.healthBar.updateHealth(1);
+    this.healthBar.updateHealth(1, this.health, this.maxHealth);
   }
 
   abstract drawShape(): void;
@@ -163,7 +163,10 @@ export abstract class Enemy extends Container {
       amount *= (1 - effectiveArmor);
     }
     this.health -= amount;
-    this.healthBar.updateHealth(this.health / this.maxHealth);
+    const ratio = Math.max(0, this.health / this.maxHealth);
+    this.healthBar.updateHealth(ratio, this.health, this.maxHealth);
+    const v = Math.round(0x33 + (0xff - 0x33) * ratio);
+    this.body.tint = (v << 16) | (v << 8) | v;
     if (this.health <= 0) {
       this.isDead = true;
     }

@@ -1,4 +1,4 @@
-import { Container, Graphics } from 'pixi.js';
+import { Container, Graphics, Text } from 'pixi.js';
 import { TowerType, TowerLevelStats } from '../../types';
 import { Enemy } from '../enemies/Enemy';
 import { towers as TOWER_CONFIGS } from '../../data/game-configs.json';
@@ -18,10 +18,13 @@ export abstract class Tower extends Container {
   protected head: Graphics;
   protected rangeGfx: Graphics;
   private levelGfx: Graphics;
+  private upIconContainer: Container;
   private cooldownTimer: number = 0;
+  private blinkTimer: number = 0;
   showingRange: boolean = false;
 
   onFire?: (tower: Tower, target: Enemy) => void;
+  onUpgradeIconClick?: () => void;
 
   constructor(row: number, col: number) {
     super();
@@ -40,6 +43,42 @@ export abstract class Tower extends Container {
 
     this.levelGfx = new Graphics();
     this.addChild(this.levelGfx);
+
+    this.upIconContainer = new Container();
+    this.upIconContainer.visible = false;
+    this.addChild(this.upIconContainer);
+    this._buildUpIcon();
+  }
+
+  private _buildUpIcon(): void {
+    const c = this.upIconContainer;
+    c.removeChildren();
+
+    const bg = new Graphics();
+    bg.roundRect(-13, -10, 26, 20, 5).fill({ color: 0x27ae60 });
+    c.addChild(bg);
+
+    const label = new Text({
+      text: 'UP',
+      style: { fontSize: 10, fill: 0xffffff, fontFamily: 'Arial', fontWeight: 'bold' },
+    });
+    label.anchor.set(0.5);
+    label.x = 0;
+    label.y = 0;
+    c.addChild(label);
+
+    c.x = 18;
+    c.y = 18;
+    c.interactive = true;
+    c.cursor = 'pointer';
+    c.on('pointertap', (e) => {
+      e.stopPropagation();
+      this.onUpgradeIconClick?.();
+    });
+  }
+
+  showUpIcon(canAfford: boolean): void {
+    this.upIconContainer.visible = this.canUpgrade && canAfford;
   }
 
   abstract drawTower(): void;
@@ -103,6 +142,11 @@ export abstract class Tower extends Container {
   }
 
   update(dt: number, enemies: Enemy[], _towers?: Tower[]): void {
+    if (this.upIconContainer.visible) {
+      this.blinkTimer += dt;
+      this.upIconContainer.alpha = 0.55 + 0.45 * Math.abs(Math.sin(this.blinkTimer * 0.08));
+    }
+
     this.cooldownTimer -= dt * (1000 / 60);
 
     const target = this.findTarget(enemies);

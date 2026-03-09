@@ -1,19 +1,15 @@
-import { Graphics } from 'pixi.js';
-import { COLORS } from '../../constants';
+import { Text } from 'pixi.js';
 
-export class HealthBar extends Graphics {
-  private barWidth = 40;
-  private barHeight = 5;
-
+export class HealthBar extends Text {
   constructor() {
-    super();
-    this.y = -22;
+    super({ text: '', style: { fontSize: 11, fill: 0xffffff, fontWeight: 'bold' } });
+    this.anchor.set(0.5, 0.5);
+    this.y = 0;
   }
 
-  updateHealth(ratio: number): void {
-    this.clear();
-    const x = -this.barWidth / 2;
-    this.rect(x, 0, this.barWidth, this.barHeight).fill(COLORS.healthRed);
-    this.rect(x, 0, this.barWidth * Math.max(0, ratio), this.barHeight).fill(COLORS.healthGreen);
+  updateHealth(ratio: number, current?: number, max?: number): void {
+    if (current !== undefined) {
+      this.text = Math.ceil(current).toString();
+    }
   }
 }

@@ -17,6 +17,7 @@ import { UpgradeMenu } from '../ui/UpgradeMenu';
 import { CoinAnimation } from '../ui/CoinAnimation';
 import { WaveCountdown } from '../ui/WaveCountdown';
 import { NewTowerPopup, getNewTowersForLevel } from '../ui/NewTowerPopup';
+import { DevSpawnPanel } from '../ui/DevSpawnPanel';
 import { VictoryScene } from './VictoryScene';
 import { DefeatScene } from './DefeatScene';
 import { Cell } from '../game/Cell';
@@ -37,6 +38,7 @@ export class GameScene extends Container implements Scene {
   private coinAnim!: CoinAnimation;
   private waveCountdown!: WaveCountdown;
   private newTowerPopup!: NewTowerPopup;
+  private devSpawnPanel?: DevSpawnPanel;
   private coins: number = 0;
   private lives: number = 0;
   private gameOver: boolean = false;
@@ -87,7 +89,8 @@ export class GameScene extends Container implements Scene {
     this.addChild(this.hud);
     this.hud.coins = this.coins;
     this.hud.lives = this.lives;
-    this.hud.setWave(1, this.level.waves.length);
+    this.grid.updateLives(this.lives);
+    if (this.level.id !== 0) this.hud.setWave(1, this.level.waves.length);
 
     // Coin animation
     this.coinAnim = new CoinAnimation();
@@ -118,6 +121,7 @@ export class GameScene extends Container implements Scene {
     this.enemyManager.onEnemyReachedBase = () => {
       this.lives--;
       this.hud.lives = this.lives;
+      this.grid.updateLives(this.lives);
       if (this.lives <= 0 && !this.gameOver) {
         this.gameOver = true;
         this.sceneManager.goTo(new DefeatScene(this.sceneManager, this.level));
@@ -161,16 +165,30 @@ export class GameScene extends Container implements Scene {
     this.newTowerPopup = new NewTowerPopup(w, h);
     this.addChild(this.newTowerPopup);
 
-    const newTowers = getNewTowersForLevel(this.level.id);
-    if (newTowers.length > 0) {
-      this.introPopupActive = true;
-      this.newTowerPopup.onDone = () => {
-        this.introPopupActive = false;
-        this.waveManager.init(this.level.waves);
+    if (this.level.id === 0) {
+      // Dev mode: manual spawn panel, no automatic waves
+      this.waveManager.devMode = true;
+      this.waveManager.onDevWaveComplete = () => {
+        this.devSpawnPanel?.setSpawning(false);
       };
-      this.newTowerPopup.show(newTowers);
+      this.devSpawnPanel = new DevSpawnPanel(w, h);
+      this.devSpawnPanel.onStartWave = (groups) => {
+        this.devSpawnPanel!.setSpawning(true);
+        this.waveManager.spawnCustom(groups);
+      };
+      this.addChild(this.devSpawnPanel);
     } else {
-      this.waveManager.init(this.level.waves);
+      const newTowers = getNewTowersForLevel(this.level.id);
+      if (newTowers.length > 0) {
+        this.introPopupActive = true;
+        this.newTowerPopup.onDone = () => {
+          this.introPopupActive = false;
+          this.waveManager.init(this.level.waves);
+        };
+        this.newTowerPopup.show(newTowers);
+      } else {
+        this.waveManager.init(this.level.waves);
+      }
     }
   }
 
@@ -309,10 +327,13 @@ export class GameScene extends Container implements Scene {
       };
     }
 
+    tower.onUpgradeIconClick = () => this.upgradeTower(tower);
+
     this.selectedCell.tower = tower;
     this.towerManager.add(tower);
     this.selectedCell = null;
 
+    this.refreshUpgradeIcons();
   }
 
   private upgradeTower(tower: Tower): void {
@@ -322,6 +343,13 @@ export class GameScene extends Container implements Scene {
 
     this.changeCoins(-cost);
     tower.upgrade();
+    this.refreshUpgradeIcons();
+  }
+
+  private refreshUpgradeIcons(): void {
+    for (const tower of this.towerManager.towers) {
+      tower.showUpIcon(this.coins >= tower.upgradeCost);
+    }
   }
 
   private sellTower(tower: Tower): void {
@@ -341,6 +369,7 @@ export class GameScene extends Container implements Scene {
     if (this.upgradeMenu.visible && this.selectedCell?.tower) {
       this.upgradeMenu.open(this.selectedCell.tower, this.coins);
     }
+    this.refreshUpgradeIcons();
   }
 
   update(dt: number): void {

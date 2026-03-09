@@ -1,7 +1,7 @@
 {
   "id": 4,
   "name": "Long Trail",
-  "startingMoney": 100,
+  "startingMoney": 150,
   "lives": 15,
   "availableTowers": ["bullet", "magic", "cryo", "laser"],
   "grid": [
@@ -41,19 +41,18 @@
     },
     {
       "groups": [
-        { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 0 },
-        { "type": "square", "count": 1, "spawnInterval": 5000, "delayBefore": 8000 },
-        { "type": "hexagon", "count": 1, "spawnInterval": 0, "delayBefore": 18000 }
+        { "type": "hexagon", "count": 2, "spawnInterval": 4000, "delayBefore": 0 },
+        { "type": "square", "count": 3, "spawnInterval": 2200, "delayBefore": 9000 }
       ],
-      "gold": 265
+      "gold": 155
     },
     {
       "groups": [
         { "type": "pentagon", "count": 1, "spawnInterval": 0, "delayBefore": 0 },
-        { "type": "hexagon", "count": 2, "spawnInterval": 4000, "delayBefore": 7500 },
-        { "type": "square", "count": 4, "spawnInterval": 2000, "delayBefore": 15000 }
+        { "type": "hexagon", "count": 2, "spawnInterval": 3500, "delayBefore": 10000 },
+        { "type": "square", "count": 3, "spawnInterval": 2000, "delayBefore": 18000 }
       ],
-      "gold": 380
+      "gold": 355
     },
     {
       "groups": [

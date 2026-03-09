@@ -7,6 +7,7 @@ export class TriangleEnemy extends Enemy {
   constructor(health: number, speed: number, reward: number, color: number) {
     super(health, speed, reward, color);
     this.drawShape();
+    this.healthBar.y = 5;
   }
 
   drawShape(): void {

@@ -11,7 +11,7 @@ export class MTriangleEnemy extends Enemy {
 
   drawShape(): void {
     this.body.clear();
-    this.body.poly([0, -8, 8, 7, -8, 7]).fill(this.color);
-    this.body.poly([0, -8, 8, 7, -8, 7]).stroke({ color: 0x000000, alpha: 0.3, width: 1 });
+    this.body.circle(0, 0, 8).fill(this.color);
+    this.body.circle(0, 0, 8).stroke({ color: 0x000000, alpha: 0.3, width: 1 });
   }
 }

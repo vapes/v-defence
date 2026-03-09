@@ -1,4 +1,4 @@
-import { WaveConfig, WaveState, EnemyType } from '../types';
+import { WaveConfig, WaveGroup, WaveState, EnemyType } from '../types';
 import { EnemyFactory } from './enemies/EnemyFactory';
 import { EnemyManager } from './EnemyManager';
 import { COUNTDOWN_SECONDS } from '../constants';
@@ -19,6 +19,7 @@ export class WaveManager {
   currentWave: number = 0;
   totalWaves: number = 0;
   countdownTime: number = 0;
+  devMode: boolean = false;
 
   private waves: WaveConfig[] = [];
   private enemyManager: EnemyManager;
@@ -29,6 +30,7 @@ export class WaveManager {
   onWaveStart?: (wave: number) => void;
   onAllWavesComplete?: () => void;
   onCountdownTick?: (seconds: number) => void;
+  onDevWaveComplete?: () => void;
 
   constructor(enemyManager: EnemyManager) {
     this.enemyManager = enemyManager;
@@ -45,6 +47,22 @@ export class WaveManager {
   startWave(): void {
     if (this.state !== WaveState.Building) return;
     this.startNextWave();
+  }
+
+  spawnCustom(groups: WaveGroup[]): void {
+    if (this.state === WaveState.Spawning || this.state === WaveState.Waiting) return;
+    const tasks = groups.filter((g) => g.count > 0);
+    if (tasks.length === 0) return;
+    this.spawnTasks = tasks.map((g) => ({
+      type: g.type,
+      count: g.count,
+      spawnInterval: g.spawnInterval,
+      delayBefore: g.delayBefore,
+      spawned: 0,
+      timer: 0,
+      delayDone: g.delayBefore === 0,
+    }));
+    this.state = WaveState.Spawning;
   }
 
   private startNextWave(): void {
@@ -78,13 +96,18 @@ export class WaveManager {
         break;
       case WaveState.Waiting:
         if (this.enemyManager.activeCount === 0) {
-          this.currentWave++;
-          if (this.currentWave >= this.totalWaves) {
-            this.state = WaveState.Complete;
-            this.onAllWavesComplete?.();
+          if (this.devMode) {
+            this.state = WaveState.Idle;
+            this.onDevWaveComplete?.();
           } else {
-            this.state = WaveState.Countdown;
-            this.countdownTime = COUNTDOWN_SECONDS * 1000;
+            this.currentWave++;
+            if (this.currentWave >= this.totalWaves) {
+              this.state = WaveState.Complete;
+              this.onAllWavesComplete?.();
+            } else {
+              this.state = WaveState.Countdown;
+              this.countdownTime = COUNTDOWN_SECONDS * 1000;
+            }
           }
         }
         break;
